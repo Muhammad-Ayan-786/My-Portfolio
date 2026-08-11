@@ -1,5 +1,6 @@
 import React from 'react';
 import { Cursor, useTypewriter } from 'react-simple-typewriter';
+import CustomCursor from './CustomCursor';
 
 const Hero = () => {
 
@@ -14,7 +15,7 @@ const Hero = () => {
     'Building with Node.js...',
     'Building with Express...',
     'Building with MongoDB...'
-  ]
+  ];
 
   const [text] = useTypewriter({
     words: sentencesArray,
@@ -22,74 +23,179 @@ const Hero = () => {
     delaySpeed: 2000,
     typeSpeed: 80,
     deleteSpeed: 50,
-  })
+  });
 
+  const nameLetters = ['M', 'O', 'H', 'D', ' ', 'A', 'Y', 'A', 'N'];
 
   return (
-    <section id="hero" className="w-full bg-[#FAF9F5] relative overflow-hidden lg:min-h-162.5 flex items-stretch px-6 lg:px-6">
+    <section
+      id="hero"
+      className="w-full h-svh min-h-162.5 bg-[#FAF9F5] relative overflow-hidden px-6"
+    >
 
-      {/* Green Block on the right - starts below the header area, extends to the right viewport edge */}
-      <div
-        className="hero-photo absolute right-6 top-36 bottom-0 left-[60%] bg-[#CCFF00] z-0 hidden lg:block"
-        style={{ height: 'calc(100% - 175px)', backgroundImage: 'url(/src/assets/portfolio-img.png)', backgroundSize: 'cover', backgroundPosition: 'top', backgroundRepeat: 'no-repeat' }}
-      />
+      <CustomCursor />
 
-      {/* <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-6 py-20 md:py-32 relative z-10 w-full flex items-start"> */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-6 py-20 md:py-20 relative z-10 w-full flex items-start">
+      {/* Top Information Bar */}
+      <div className="max-w-7xl mx-auto w-full absolute top-0 left-1/2 -translate-x-1/2 px-6 md:px-12 lg:px-6 z-20">
+        <div className="hero-top flex items-center justify-between pt-6 text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-[#2b1200]">
+
+          <span>M.AYAN.DEV</span>
+          <span className="hidden md:block">FRONT-END / 2026</span>
+          <span>JHB ↗</span>
+
+        </div>
+      </div>
 
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start w-full">
+      {/* Main Hero Container */}
+      <div className="max-w-7xl mx-auto w-full h-full relative z-10">
 
-          {/* Left Column (Content aligned near the top) */}
-          <div className="lg:col-span-7 flex flex-col gap-6" id="hero-left">
-            <div className="flex flex-col gap-3">
-              <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none select-none text-[#2b1200]">
-                {/* <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none select-none text-[#0a194a]"> */}
-                {
-                  ['M', 'O', 'H', 'D', ' ', 'A', 'Y', 'A', 'N'].map((letter, index) => (
-                    <span key={index} className="letter">{letter}</span>
-                  ))
-                }
-              </h1>
-              {/* Thick dark coffee-brown underline */}
-              <div className="hero-underline h-2 bg-[#2b1200] w-72 mt-1 origin-left" />
-              {/* <div className="hero-underline h-2 bg-[#04144e] w-72 mt-1 origin-left" /> */}
-            </div>
+        {/* =========================
+            NAME - MOHD
+        ========================== */}
+        <div id="hero-left"
+          className="hero-left absolute left-0 top-[15%] md:top-[13%] lg:top-[12%] z-10">
 
-            <div className="flex flex-col gap-4 mt-6">
-              <h2 className="hero-tag text-3xl md:text-5xl font-black tracking-tight uppercase leading-tight text-[#2b1200] z-10">
-                {/* <h2 className="hero-tag text-3xl md:text-5xl font-black tracking-tight uppercase leading-tight text-[#071648] z-10"> */}
-                FULL-STACK DEVELOPER IN THE MAKING
-              </h2>
-
-              {/* Typewriter placeholder */}
-              <span className="hero-typewriter font-mono text-base text-[#2b1200]/70 uppercase tracking-wide">
-                {/* <span className="hero-typewriter font-mono text-base text-[#071648]/70 uppercase tracking-wide"> */}
-                &gt; {text}
-                {/* <span><Cursor cursorColor='#2b1200' cursorStyle='|' /></span> */}
-                <span className="cursor-blink">|</span>
+          <h1 className="text-[clamp(5rem,13vw,12rem)] font-black tracking-[-0.08em] uppercase leading-[0.72] select-none text-[#2b1200] flex">
+            {nameLetters.slice(0, 4).map((letter, index) => (
+              <span key={index} className="letter letter-mohd inline-block">
+                {letter}
               </span>
+            ))}
+          </h1>
 
-              <p className="hero-paragraph text-sm md:text-base text-[#2b1200]/90 leading-relaxed max-w-xl font-medium mt-4">
-                {/* <p className="hero-paragraph text-sm md:text-base text-[#071648]/90 leading-relaxed max-w-xl font-medium mt-4"> */}
-                I am a Grade 11 student passionately immersed in the full-stack ecosystem. I thrive on the challenge of architecting systems that are both highly performant and aesthetically compelling.
-              </p>
-            </div>
-          </div>
+          <div className="hero-underline h-2 bg-[#2b1200] w-48 md:w-64 lg:w-72 mt-6 origin-left" />
+        </div>
 
-          {/* Right Column */}
-          <div className="lg:col-span-5 relative lg:pt-48 flex justify-start w-full" id="hero-right">
-            <div
-              className="w-full aspect-4/3 border-2 border-[#2b1200] relative lg:hidden mt-8 rounded-none"
-              style={{ backgroundImage: 'url(/src/assets/portfolio-img.png)', backgroundSize: 'cover', backgroundPosition: 'top', backgroundRepeat: 'no-repeat' }}
-            />
+
+        {/* =========================
+            PHOTO / VISUAL ANCHOR
+        ========================== */}
+        <div
+          id="hero-right"
+          className="hero-right absolute z-0
+            left-[18%] top-[28%]
+            w-[52%] h-[42%]
+            md:left-[27%] md:top-[23%]
+            md:w-[43%] md:h-[54%]
+            lg:left-[32%] lg:top-[20%]
+            lg:w-[38%] lg:h-[58%]"
+        >
+
+          <div
+            className="hero-photo absolute inset-0 bg-[#CCFF00] border-2 border-[#2b1200]"
+            style={{
+              backgroundImage: 'url(/src/assets/portfolio-img.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'top',
+              backgroundRepeat: 'no-repeat',
+            }}
+          />
+
+          {/* Image Label */}
+          <div className="hero-photo-label absolute -right-3 -top-3 md:-right-5 md:-top-5 bg-[#CCFF00] border-2 border-[#2b1200] px-3 py-1 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-[#2b1200]">
+            01 / ME
           </div>
 
         </div>
 
-      </div>
-    </section >
-  )
-}
 
-export default Hero
+        {/* =========================
+            AYAN
+        ========================== */}
+        <div className="absolute right-[-1%] md:right-[-2%] lg:right-[-1%] top-[39%] md:top-[38%] lg:top-[39%] z-10">
+
+          <h1 className="text-[clamp(5rem,13vw,12rem)] font-black tracking-[-0.08em] uppercase leading-[0.72] select-none text-[#2b1200]">
+            {nameLetters.slice(5).map((letter, index) => (
+              <span
+                key={index}
+                className="letter letter-ayan inline-block"
+              >
+                {letter}
+              </span>
+            ))}
+          </h1>
+
+        </div>
+
+
+        {/* =========================
+            DEVELOPER TAG
+        ========================== */}
+        <div className="absolute left-0 bottom-[28%] md:bottom-[25%] lg:bottom-[24%] z-10 max-w-65 md:max-w-[320px]">
+
+          <h2 className="hero-tag text-2xl md:text-3xl lg:text-4xl font-black tracking-tight uppercase leading-[0.95] text-[#2b1200]">
+            FRONT-END
+            <br />
+            DEVELOPER
+          </h2>
+
+          <div className="hero-making mt-3 text-[9px] md:text-[10px] uppercase tracking-[0.18em] font-bold text-[#2b1200]/50">
+            IN THE MAKING
+          </div>
+
+        </div>
+
+
+        {/* =========================
+            TYPEWRITER
+        ========================== */}
+        <div className="absolute left-0 bottom-[18%] md:bottom-[16%] lg:bottom-[15%] z-10">
+
+          <span className="hero-typewriter font-mono text-xs md:text-sm text-[#2b1200]/70 uppercase tracking-wide">
+            &gt; {text}
+            <span className="cursor-blink">|</span>
+          </span>
+
+        </div>
+
+
+        {/* =========================
+            DESCRIPTION
+        ========================== */}
+        <div className="absolute left-[52%] md:left-[55%] lg:left-[60%] bottom-[18%] md:bottom-[17%] lg:bottom-[16%] z-10 max-w-75 md:max-w-90">
+          <p className="hero-paragraph text-xs md:text-sm text-[#2b1200]/80 leading-relaxed font-medium">
+            I build interactive web experiences where code meets visual design.
+          </p>
+        </div>
+
+
+        {/* =========================
+            ACTIONS
+        ========================== */}
+        <div className='hero-actions absolute left-[52%] md:left-[55%] lg:left-[60%] bottom-[6%] z-10 flex items-center gap-3'>
+          <a
+            href="#projects"
+            className="px-5 md:px-7 py-2.5 md:py-3 bg-[#2b1200] text-[#CCFF00] text-[10px] md:text-xs font-bold uppercase tracking-wider shadow-[4px_4px_0px_0px_rgba(204,255,0,0.5)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+          >
+            View Projects
+          </a>
+
+          <button
+            className="px-5 md:px-7 py-2.5 md:py-3 border-2 border-[#2b1200] text-[#2b1200] text-[10px] md:text-xs font-bold uppercase tracking-wider hover:bg-[#2b1200] hover:text-[#CCFF00] transition-all"
+          >
+            Download Resume ↗
+          </button>
+        </div>
+
+
+        {/* =========================
+            BOTTOM META
+        ========================== */}
+        <div className="absolute bottom-5 left-0 right-0 flex items-center justify-between text-[9px] md:text-[10px] uppercase tracking-[0.18em] font-bold text-[#2b1200]/50">
+
+          <span className="hero-meta flex items-center gap-2">
+            <span className="w-1.5 h-1.5 bg-[#CCFF00] border border-[#2b1200] rounded-full" />
+            Available to build
+          </span>
+
+          <a href="#about" className="hero-meta">Scroll ↓</a>
+        </div>
+
+      </div>
+
+    </section>
+  );
+};
+
+export default Hero;
