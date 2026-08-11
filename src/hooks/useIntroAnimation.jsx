@@ -7,30 +7,50 @@ export const useIntroAnimation = (refElement, isLoading) => {
 
     const tl = gsap.timeline()
 
-    // Navbar
-    tl.from('.nav-logo', {
-      y: -60,
-      duration: 0.8,
-      delay: 0.2,
-      opacity: 0,
-      rotate: -10,
-      ease: "back.out(1.7)",
-    })
-      .from('.nav-link', {
-        y: -60,
-        duration: 0.8,
+    tl
+      // nav logo
+      .from('.nav-logo', {
+        y: -50,
         opacity: 0,
-        rotate: -10,
-        ease: "back.out(1.7)",
-        stagger: 0.1
-      }, "-=0.6")
-      .from('.nav-resume', {
-        y: -60,
+        rotate: -8,
         duration: 0.8,
-        opacity: 0,
-        rotate: -10,
-        ease: "back.out(1.7)",
-      }, "-=0.6")
+        ease: 'back.out(1.7)',
+      })
+
+      // nav-links
+      .fromTo(
+        '.nav-link',
+        {
+          y: -30,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: 'power3.out',
+        },
+        '-=0.5'
+      )
+
+      // resume btn in nav
+      .fromTo(
+        '.nav-resume',
+        {
+          y: -30,
+          opacity: 0,
+          scale: 0.85,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          ease: 'back.out(1.7)',
+        },
+        "-=0.4"
+      )
 
       // Hero top info
       .from('.hero-top', {
