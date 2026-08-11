@@ -16,12 +16,12 @@ const CustomCursor = () => {
     // a final position, like I'm moving in
     // perspective of 'x'
     const xTo = gsap.quickTo(cursor, 'x', {
-      duration: 0.2,
+      duration: 0.4,
       ease: 'back.out(1.7)',
     })
 
     const yTo = gsap.quickTo(cursor, 'y', {
-      duration: 0.2,
+      duration: 0.4,
       ease: 'back.out(1.7)',
     })
 

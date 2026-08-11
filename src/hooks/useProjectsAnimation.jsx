@@ -46,8 +46,6 @@ export const useProjectCardInfoAnimation = (refElement, showInfo) => {
 
     if (!card) return
 
-    gsap.killTweensOf(card)
-
     if (showInfo) {
       gsap.set(card, {
         xPercent: -110,

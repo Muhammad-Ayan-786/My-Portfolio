@@ -3,10 +3,10 @@ import React from 'react'
 const Navbar = () => {
 
   const navItems = [
-    { label: 'PROFILE', number: '01', href: '#about' },
-    { label: 'STACK', number: '02', href: '#skills' },
+    { label: 'PROFILE', number: '01', href: '#profile' },
+    { label: 'STACK', number: '02', href: '#stack' },
     { label: 'WORK', number: '03', href: '#projects' },
-    { label: 'EVOLUTION', number: '04', href: '#journey' },
+    { label: 'EVOLUTION', number: '04', href: '#evolution' },
     { label: 'CONNECT', number: '05', href: '#contact' },
   ]
 

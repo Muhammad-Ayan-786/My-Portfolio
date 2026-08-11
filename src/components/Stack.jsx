@@ -1,20 +1,41 @@
 import React, { useRef } from 'react';
 import { skills } from '../data/skills';
-import { useSkillsAnimation } from '../hooks/useSkillsAnimation';
+import { useStackAnimation } from '../hooks/useStackAnimation';
 
-const Skills = () => {
+const Stack = () => {
 
-  const skillsRef = useRef(null)
-  useSkillsAnimation(skillsRef)
+  const stackRef = useRef(null)
+  useStackAnimation(stackRef)
 
   return (
-    <section ref={skillsRef} id="skills" className="w-full border-b border-[#2b1200] bg-[#FAF9F5]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 flex flex-col items-center">
+    <section ref={stackRef} id="stack" className="w-full  bg-[#FAF9F5]">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 pb-24 pt-16 flex flex-col items-center">
 
-        {/* Headline */}
-        <h2 className="skills-heading text-4xl md:text-6xl font-black tracking-tight uppercase mb-16 select-none" id="skills-heading">
-          TECH STACK
-        </h2>
+        <div className="relative w-full mb-20 md:mb-28 overflow-hidden">
+
+          {/* Section Index */}
+          <div className="flex items-center justify-between mb-6">
+            <span className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase">
+              02 / WHAT I USE
+            </span>
+
+            <span className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase text-[#2b1200]/50">
+              STACK / 2026
+            </span>
+          </div>
+
+          {/* Giant Heading */}
+          <div className="relative border-t-2 border-b-2 border-[#2b1200] py-6 md:py-8">
+            <h2 className="skills-heading text-[5rem] md:text-[8rem] lg:text-[10rem] leading-[0.75] font-black tracking-tighter uppercase text-[#2b1200]">
+              TECH
+              <span className="text-[#CCFF00]">.</span>
+              <br />
+              STACK
+            </h2>
+          </div>
+
+        </div>
+
 
         {/* Columns Grid */}
         <div className="skills-box grid grid-cols-1 md:grid-cols-3 border border-[#2b1200] bg-white rounded-none">
@@ -112,8 +133,8 @@ const Skills = () => {
         </div>
 
       </div>
-    </section>
+    </section >
   )
 }
 
-export default Skills
+export default Stack

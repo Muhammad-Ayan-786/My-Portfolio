@@ -4,12 +4,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 gsap.registerPlugin(ScrollTrigger)
 
-export const useSkillsAnimation = (refElement) => {
+export const useStackAnimation = (refElement) => {
   useGSAP(() => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".skills-heading",
-        start: "center 50%",
+        start: "center 60%",
       }
     })
 

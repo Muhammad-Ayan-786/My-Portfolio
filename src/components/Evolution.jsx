@@ -2,19 +2,40 @@ import React, { useRef } from 'react';
 import { timelineEntries } from '../data/journey';
 import { useTimeLineAnimation } from '../hooks/useTimeLineAnimation';
 
-const Journey = () => {
+const Evolution = () => {
 
-  const journeyRef = useRef(null)
-  useTimeLineAnimation(journeyRef)
+  const evolutionRef = useRef(null)
+  useTimeLineAnimation(evolutionRef)
 
   return (
-    <section ref={journeyRef} id="journey" className="w-full border-b border-[#2b1200] bg-[#FAF9F5]">
+    <section ref={evolutionRef} id="evolution" className="w-full  bg-[#FAF9F5]">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 flex flex-col items-center">
 
-        {/* Heading */}
-        <h2 className="journey-heading text-4xl md:text-6xl font-black tracking-tight uppercase mb-20 select-none" id="timeline-heading">
-          EVOLUTION
-        </h2>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 pt-24">
+
+          {/* Section Meta */}
+          <div className="flex items-center justify-between mb-6">
+            <span className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase">
+              04 / THE EVOLUTION
+            </span>
+
+            <span className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase text-[#2b1200]/50">
+              EVOLUTION / 2026
+            </span>
+          </div>
+
+          {/* Giant Heading */}
+          <div className="relative border-t-2 border-b-2 border-[#2b1200] py-8 md:py-10">
+            <h2 className="evolution-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-none font-black tracking-tighter uppercase text-[#2b1200] text-center whitespace-nowrap">
+              EVOLUTION<span className="text-[#CCFF00]">.</span>
+            </h2>
+          </div>
+
+        </div>
+
+
+
+
 
         {/* Timeline Wrapper */}
         <div className="relative w-full max-w-4xl flex flex-col gap-16 md:gap-16">
@@ -73,8 +94,8 @@ const Journey = () => {
 
         </div>
       </div>
-    </section>
+    </section >
   )
 }
 
-export default Journey
+export default Evolution

@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
+import Profile from './components/Profile';
+import Stack from './components/Stack';
 import Projects from './components/Projects';
-import Journey from './components/Journey';
+import Evolution from './components/Evolution';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { useIntroAnimation } from './hooks/useIntroAnimation';
@@ -24,10 +24,10 @@ const App = () => {
         <>
           <Navbar />
           <Hero />
-          <About />
-          <Skills />
+          <Profile />
+          <Stack />
           <Projects />
-          <Journey />
+          <Evolution />
           <Contact />
           <Footer />
         </>

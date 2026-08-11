@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useContactAnimation } from '../hooks/useContactAnimation';
 
 const Contact = () => {
   const socials = [
@@ -8,8 +9,11 @@ const Contact = () => {
     { label: 'TWITTER', value: '@ayanwrites', href: 'https://www.instagram.com/xo_.ani._/' }
   ]
 
+  const contactRef = useRef(null)
+  useContactAnimation(contactRef)
+
   return (
-    <section id="contact" className="w-full border-b border-[#2b1200] bg-[#FAF9F5]">
+    <section ref={contactRef} id="contact" className="w-full border-b border-[#2b1200] bg-[#FAF9F5]">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 lg:py-32">
         <div className="flex flex-col gap-16 lg:flex-row lg:items-start lg:gap-20">
 

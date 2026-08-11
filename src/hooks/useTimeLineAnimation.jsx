@@ -8,14 +8,14 @@ gsap.registerPlugin(ScrollTrigger)
 export const useTimeLineAnimation = (refElement) => {
   useGSAP(() => {
 
-    gsap.from('.journey-heading', {
+    gsap.from('.evolution-heading', {
       y: -60,
       duration: 0.8,
       opacity: 0,
       rotate: -10,
       ease: "back.out(1.7)",
       scrollTrigger: {
-        trigger: '.journey-heading',
+        trigger: '.evolution-heading',
         start: 'center 75%',
       }
     })
