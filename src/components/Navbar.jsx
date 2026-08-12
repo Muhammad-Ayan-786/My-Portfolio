@@ -57,7 +57,7 @@ const Navbar = () => {
           {/* Resume (desktop) */}
           <div className="hidden md:flex flex-1 justify-end">
             <a
-              href="/public/My_Resume.pdf"
+              href="/My_Resume.pdf"
               download="Modh_Ayan_Resume.pdf"
               className="nav-resume opacity-0 group relative flex items-center gap-3 border-2 border-primary px-4 md:px-5 py-2.5 text-[9px] md:text-[10px] uppercase font-bold tracking-[0.12em] text-primary transition-all duration-300 rounded-none overflow-hidden"
             >
@@ -91,7 +91,7 @@ const Navbar = () => {
               </a>
             ))}
             <a
-              href="/public/My_Resume.pdf"
+              href="/My_Resume.pdf"
               download="Modh_Ayan_Resume.pdf"
               className="mt-8 text-2xl font-black uppercase text-primary tracking-[0.12em] border-2 border-primary px-4 py-2"
               onClick={() => setMenuOpen(false)}

@@ -162,7 +162,7 @@ const Hero = () => {
           </a>
 
           <a
-            href='/public/resume.pdf'
+            href='/My_Resume.pdf'
             download='Modh_Ayan_Resume.pdf'
             className="px-5 md:px-7 py-2.5 md:py-3 border-2 border-primary text-primary text-[10px] md:text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-accent transition-all"
           >
