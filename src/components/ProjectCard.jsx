@@ -22,7 +22,7 @@ const ProjectCard = ({ project }) => {
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-[85vh] object-cover filter grayscale hover:grayscale-0 transition-all duration-700"
+          className="w-full h-[85vh] object-cover object-top filter grayscale hover:grayscale-0 transition-all duration-700"
         />
 
         {/* Controls */}
