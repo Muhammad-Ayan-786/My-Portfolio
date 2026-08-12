@@ -171,11 +171,13 @@ const Hero = () => {
             View Projects
           </a>
 
-          <button
+          <a
+            href='/public/resume.pdf'
+            download='Modh_Ayan_Resume.pdf'
             className="px-5 md:px-7 py-2.5 md:py-3 border-2 border-[#2b1200] text-[#2b1200] text-[10px] md:text-xs font-bold uppercase tracking-wider hover:bg-[#2b1200] hover:text-[#CCFF00] transition-all"
           >
             Download Resume ↗
-          </button>
+          </a>
         </div>
 
 

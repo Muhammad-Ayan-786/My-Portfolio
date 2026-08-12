@@ -3,10 +3,9 @@ import { useContactAnimation } from '../hooks/useContactAnimation';
 
 const Contact = () => {
   const socials = [
-    { label: 'EMAIL', value: 'hello@ayan.dev', href: 'mailto:hello@ayan.dev' },
-    { label: 'GITHUB', value: 'github.com/ayan', href: 'https://github.com' },
-    { label: 'LINKEDIN', value: 'linkedin.com/in/ayan', href: 'https://linkedin.com' },
-    { label: 'TWITTER', value: '@ayanwrites', href: 'https://www.instagram.com/xo_.ani._/' }
+    { label: 'GITHUB', value: 'github.com/mohd-ayan', href: 'https://github.com/Muhammad-Ayan-786' },
+    { label: 'LINKEDIN', value: 'linkedin.com/in/mohd-ayan', href: 'https://www.linkedin.com/in/mohammad-ayan-asim-12625338b/' },
+    { label: 'EMAIL', value: 'mohd.ayanasim.786@gmail.com', href: 'mailto:mohd.ayanasim.786@gmail.com' },
   ]
 
   const contactRef = useRef(null)
@@ -38,7 +37,7 @@ const Contact = () => {
                   href={item.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex flex-col items-start"
+                  className="flex flex-col items-start w-fit"
                 >
                   <span className="mb-1 font-mono text-[0.65rem] uppercase tracking-[0.3em] text-neutral-600 contact-link-label">
                     {item.label}

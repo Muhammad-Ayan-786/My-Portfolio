@@ -4,10 +4,9 @@ import { useFooterAnimation } from '../hooks/useFooterAnimation';
 const Footer = () => {
 
   const socials = [
-    { value: 'GITHUB', href: 'https://github.com' },
-    { value: 'LINKEDIN', href: 'https://linkedin.com' },
-    { value: 'INSTAGRAM', href: 'https://www.instagram.com/xo_.ani._/' },
-    { value: 'EMAIL', href: 'mailto:mohd.ayan.asim.786@gmail.com' },
+    { value: 'GITHUB', href: 'https://github.com/Muhammad-Ayan-786' },
+    { value: 'LINKEDIN', href: 'https://www.linkedin.com/in/mohammad-ayan-asim-12625338b/' },
+    { value: 'EMAIL', href: 'mailto:mohd.ayanasim.786@gmail.com' },
   ]
   const footerRef = useRef(null)
   useFooterAnimation(footerRef)

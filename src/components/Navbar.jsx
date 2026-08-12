@@ -56,7 +56,8 @@ const Navbar = () => {
           {/* Resume (desktop) */}
           <div className="hidden md:flex flex-1 justify-end">
             <a
-              href="#resume"
+              href="/public/My_Resume.pdf"
+              download="Modh_Ayan_Resume.pdf"
               className="nav-resume opacity-0 group relative flex items-center gap-3 border-2 border-[#2b1200] px-4 md:px-5 py-2.5 text-[9px] md:text-[10px] uppercase font-bold tracking-[0.12em] text-[#2b1200] transition-all duration-300 rounded-none overflow-hidden"
             >
               {/* Lime background */}
