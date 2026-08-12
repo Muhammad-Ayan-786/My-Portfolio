@@ -14,7 +14,7 @@ const Contact = () => {
 
   return (
     <section ref={contactRef} id="contact" className="w-full border-b border-[#2b1200] bg-[#FAF9F5]">
-      <div className="contact-section max-w-7xl mx-auto px-6 md:px-12 py-24 lg:py-32">
+      <div className="contact-section max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-24 lg:pb-32 lg:pt-18">
         <div className="flex flex-col gap-16 lg:flex-row lg:items-start lg:gap-20">
 
           <div className="w-full lg:w-[65%]">
