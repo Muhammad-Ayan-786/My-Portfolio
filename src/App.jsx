@@ -11,7 +11,7 @@ import { useIntroAnimation } from './hooks/useIntroAnimation';
 import Loader from './components/Loader';
 
 const App = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const introRef = useRef()
   useIntroAnimation(introRef, loading)
