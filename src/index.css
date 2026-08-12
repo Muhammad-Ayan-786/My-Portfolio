@@ -37,7 +37,8 @@
 
   /* Loader */
   --color-loader-cream: #DED8C8;
-  --color-loader-brown: #321500;
+  /* --color-loader-brown: #321500; */
+  --color-loader-brown: #371700;
   --color-loader-dark-text: #241000;
 
   --color-white: #ffffff;

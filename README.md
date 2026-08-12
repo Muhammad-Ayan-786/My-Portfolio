@@ -1,16 +1,31 @@
-# React + Vite
+# Mohd Ayan - Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to my digital space! I am a passionate Front-End Developer with a keen eye for creating immersive, interactive, and visually stunning web experiences. 
 
-Currently, two official plugins are available:
+This repository serves as the source code for my personal portfolio. It's built to showcase my technical skills, design philosophy, and the projects I’ve poured my heart into.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 About Me
 
-## React Compiler
+I believe that the web is a canvas. My work sits at the intersection of clean code and creative design. I thrive on building seamless user interfaces that don't just function—they tell a story. Whether it's crafting intricate animations or building robust application architectures, I'm always looking to push the boundaries of what's possible on the web.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠 Tech Stack
 
-## Expanding the ESLint configuration
+- **Core**: React, JavaScript (ES6+), HTML5, CSS3.
+- **Styling**: Tailwind CSS for responsive and modern UI.
+- **Tools**: Vite, Git, and a passion for continuous learning.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🎯 What I Do
+
+- **Front-End Development**: Building complex, responsive user interfaces.
+- **Interactive Design**: Bringing life to static elements with smooth animations.
+- **Code with Purpose**: Writing clean, maintainable, and efficient code.
+
+## 📬 Let's Connect
+
+If you'd like to reach out, discuss a project, or just talk tech—I'd love to hear from you! 
+
+- **Portfolio**: [https://mohd-ayan-dev.vercel.app/] (or just explore the project!)
+- **Location**: Johannesburg (JHB)
+
+---
+*Built with love and coffee by Mohd Ayan.*

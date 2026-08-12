@@ -85,7 +85,7 @@ const Hero = () => {
           <div
             className="hero-photo absolute inset-0 bg-accent border-2 border-primary"
             style={{
-              backgroundImage: 'url(/src/assets/portfolio-img.png)',
+              backgroundImage: 'url(/portfolio-img.png)',
               backgroundSize: 'cover',
               backgroundPosition: 'top',
               backgroundRepeat: 'no-repeat',
