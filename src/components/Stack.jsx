@@ -8,7 +8,7 @@ const Stack = () => {
   useStackAnimation(stackRef)
 
   return (
-    <section ref={stackRef} id="stack" className="w-full  bg-[#FAF9F5]">
+    <section ref={stackRef} id="stack" className="w-full  bg-background">
       <div className="max-w-7xl mx-auto px-6 md:px-12 pb-24 pt-16 flex flex-col items-center">
 
         <div className="relative w-full mb-20 md:mb-28 overflow-hidden">
@@ -19,16 +19,16 @@ const Stack = () => {
               02 / WHAT I USE
             </span>
 
-            <span className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase text-[#2b1200]/50">
+            <span className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase text-primary/50">
               STACK / 2026
             </span>
           </div>
 
           {/* Giant Heading */}
-          <div className="relative border-t-2 border-b-2 border-[#2b1200] py-6 md:py-8">
-            <h2 className="skills-heading text-[5rem] md:text-[8rem] lg:text-[10rem] leading-[0.75] font-black tracking-tighter uppercase text-[#2b1200]">
+          <div className="relative border-t-2 border-b-2 border-primary py-6 md:py-8">
+            <h2 className="skills-heading text-[5rem] md:text-[8rem] lg:text-[10rem] leading-[0.75] font-black tracking-tighter uppercase text-primary">
               TECH
-              <span className="text-[#CCFF00]">.</span>
+              <span className="text-accent">.</span>
               <br />
               STACK
             </h2>
@@ -38,10 +38,10 @@ const Stack = () => {
 
 
         {/* Columns Grid */}
-        <div className="skills-box grid grid-cols-1 md:grid-cols-3 border border-[#2b1200] bg-white rounded-none">
+        <div className="skills-box grid grid-cols-1 md:grid-cols-3 border border-primary bg-white rounded-none">
 
           {/* Frontend */}
-          <div className="skills-column p-8 border-b md:border-b border-[#2b1200] md:border-r flex flex-col gap-6">
+          <div className="skills-column p-8 border-b md:border-b border-primary md:border-r flex flex-col gap-6">
             <span className="font-mono text-xs uppercase text-neutral-500 tracking-widest font-bold">
             // FRONTEND
             </span>
@@ -50,7 +50,7 @@ const Stack = () => {
               {skills.frontend.map((skill) => (
                 <span
                   key={skill}
-                  className="skill-tag border border-[#2b1200] px-3 py-1.5 font-mono text-xs uppercase bg-white rounded-none hover:bg-[#CCFF00] transition-colors cursor-default"
+                  className="skill-tag border border-primary px-3 py-1.5 font-mono text-xs uppercase bg-white rounded-none hover:bg-accent transition-colors cursor-default"
                 >
                   {skill}
                 </span>
@@ -59,7 +59,7 @@ const Stack = () => {
           </div>
 
           {/* Backend */}
-          <div className="skills-column p-8 border-b md:border-r border-[#2b1200] flex flex-col gap-6">
+          <div className="skills-column p-8 border-b md:border-r border-primary flex flex-col gap-6">
             <span className="font-mono text-xs uppercase text-neutral-500 tracking-widest font-bold">
             // BACKEND
             </span>
@@ -68,7 +68,7 @@ const Stack = () => {
               {skills.backend.map((skill) => (
                 <span
                   key={skill}
-                  className="skill-tag border border-[#2b1200] px-3 py-1.5 font-mono text-xs uppercase bg-white rounded-none hover:bg-[#CCFF00] transition-colors cursor-default"
+                  className="skill-tag border border-primary px-3 py-1.5 font-mono text-xs uppercase bg-white rounded-none hover:bg-accent transition-colors cursor-default"
                 >
                   {skill}
                 </span>
@@ -77,7 +77,7 @@ const Stack = () => {
           </div>
 
           {/* Database */}
-          <div className="skills-column p-8 border-b md:border-r border-[#2b1200] flex flex-col gap-6">
+          <div className="skills-column p-8 border-b md:border-r border-primary flex flex-col gap-6">
             <span className="font-mono text-xs uppercase text-neutral-500 tracking-widest font-bold">
             // DATABASE
             </span>
@@ -86,7 +86,7 @@ const Stack = () => {
               {skills.database.map((skill) => (
                 <span
                   key={skill}
-                  className="skill-tag bg-[#2b1200] text-white px-3 py-1.5 font-mono text-xs uppercase rounded-none hover:bg-[#CCFF00] hover:text-[#2b1200] transition-colors cursor-default"
+                  className="skill-tag bg-primary text-white px-3 py-1.5 font-mono text-xs uppercase rounded-none hover:bg-accent hover:text-primary transition-colors cursor-default"
                 >
                   {skill}
                 </span>
@@ -95,7 +95,7 @@ const Stack = () => {
           </div>
 
           {/* Animation */}
-          <div className="skills-column p-8 md:border-r border-[#2b1200] flex flex-col gap-6">
+          <div className="skills-column p-8 md:border-r border-primary flex flex-col gap-6">
             <span className="font-mono text-xs uppercase text-neutral-500 tracking-widest font-bold">
             // ANIMATION
             </span>
@@ -104,7 +104,7 @@ const Stack = () => {
               {skills.animation.map((skill) => (
                 <span
                   key={skill}
-                  className="skill-tag border border-[#2b1200] px-3 py-1.5 font-mono text-xs uppercase bg-white rounded-none hover:bg-[#CCFF00] transition-colors cursor-default"
+                  className="skill-tag border border-primary px-3 py-1.5 font-mono text-xs uppercase bg-white rounded-none hover:bg-accent transition-colors cursor-default"
                 >
                   {skill}
                 </span>
@@ -122,7 +122,7 @@ const Stack = () => {
               {skills.tools.map((skill) => (
                 <span
                   key={skill}
-                  className="skill-tag border border-[#2b1200] px-3 py-1.5 font-mono text-xs uppercase bg-white rounded-none hover:bg-[#CCFF00] transition-colors cursor-default"
+                  className="skill-tag border border-primary px-3 py-1.5 font-mono text-xs uppercase bg-white rounded-none hover:bg-accent transition-colors cursor-default"
                 >
                   {skill}
                 </span>

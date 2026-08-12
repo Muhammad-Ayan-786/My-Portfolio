@@ -9,7 +9,7 @@ const Projects = () => {
   useProjectsAnimation(projectsRef)
 
   return (
-    <section ref={projectsRef} id="projects" className="w-full border-b border-[#2b1200] overflow-hidden">
+    <section ref={projectsRef} id="projects" className="w-full border-b border-primary overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative mb-20 md:mb-28 overflow-hidden">
         {/* Section Index */}
@@ -18,17 +18,17 @@ const Projects = () => {
             03 / SELECTED WORK
           </span>
 
-          <span className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase text-[#2b1200]/50">
+          <span className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase text-primary/50">
             PROJECTS / 2026
           </span>
         </div>
 
         {/* Giant Heading */}
-        <div className="relative border-t-2 border-b-2 border-[#2b1200] py-6 md:py-8">
-          <h2 className="projects-heading text-[5rem] md:text-[8rem] lg:text-[10rem] leading-[0.75] font-black tracking-tighter uppercase text-[#2b1200]">
+        <div className="relative border-t-2 border-b-2 border-primary py-6 md:py-8">
+          <h2 className="projects-heading text-[5rem] md:text-[8rem] lg:text-[10rem] leading-[0.75] font-black tracking-tighter uppercase text-primary">
             SELECTED
             <br />
-            WORK<span className="text-[#CCFF00]">.</span>
+            WORK<span className="text-accent">.</span>
           </h2>
         </div>
 

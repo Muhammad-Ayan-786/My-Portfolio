@@ -27,7 +27,7 @@ export const useLoaderAnimation = (refElement, setLoading) => {
         duration: 0.2,
         ease: "power3.in",
         stagger: 0.03,
-        color: "#CCFF00",
+        color: "var(--color-accent)",
       })
 
       .to('.loader-left', {

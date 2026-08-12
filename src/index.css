@@ -1,9 +1,56 @@
 @import "tailwindcss";
 
+/* Original Coloring - Brown & Cream */
+/* @theme {
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "Space Mono", monospace;
+  --color-background: #FAF9F5;
+  --color-primary: #2b1200;
+  --color-accent: #CCFF00;
+  --color-footer-background: #0e0600;
+  --color-loader-cream: #d8d8d7;
+  --color-loader-brown: #241002;
+  --color-loader-dark-text: #1a0b00;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-neutral-600: oklch(43.9% 0 none);
+  --color-neutral-100: oklch(97% 0 none);
+  --color-zinc-50: oklch(98.5% 0 none);
+  --color-accent-rgba: rgba(204, 255, 0, 0.5);
+} */
+
 @theme {
   --font-sans: "Inter", sans-serif;
   --font-mono: "Space Mono", monospace;
+
+  /* Canvas */
+  --color-background: #F7F3E8;
+
+  /* Deep espresso brown */
+  --color-primary: #321500;
+
+  /* Hyper lime */
+  --color-accent: #C7FF00;
+
+  /* Footer */
+  --color-footer-background: #180A00;
+
+  /* Loader */
+  --color-loader-cream: #DED8C8;
+  --color-loader-brown: #321500;
+  --color-loader-dark-text: #241000;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-neutral-600: oklch(43.9% 0 none);
+  --color-neutral-100: oklch(97% 0 none);
+  --color-zinc-50: oklch(98.5% 0 none);
+
+  /* Lime glow */
+  --color-accent-rgba: rgba(199, 255, 0, 0.5);
 }
+
 
 @layer base {
   html {
@@ -12,11 +59,15 @@
 
   body {
     font-family: var(--font-sans);
-    background-color: #FAF9F5;
-    color: #000000;
+    background-color: var(--color-background);
+    color: var(--color-black);
     overflow-x: hidden;
-    /* #04144e */
   }
+}
+
+.hero-name .letter {
+  -webkit-text-stroke: 2px #FAF9F5;
+  paint-order: stroke fill;
 }
 
 .cursor-blink {
@@ -42,20 +93,20 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAF9F5;
+  background: var(--color-background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #2b1200;
+  background-color: var(--color-primary);
   border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #CCFF00;
+  background-color: var(--color-accent);
 }
 
 /* Firefox */
 html {
   scrollbar-width: thin;
-  scrollbar-color: #2b1200 #FAF9F5;
+  scrollbar-color: var(--color-primary) var(--color-background);
 }

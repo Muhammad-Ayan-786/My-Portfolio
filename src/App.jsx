@@ -17,7 +17,7 @@ const App = () => {
   useIntroAnimation(introRef, loading)
 
   return (
-    <div ref={introRef} className="min-h-screen bg-[#FAF9F5] text-[#2b1200] flex flex-col font-sans selection:bg-[#CCFF00]">
+    <div ref={introRef} className="min-h-screen bg-background text-primary flex flex-col font-sans selection:bg-accent">
       {loading ? (
         <Loader setLoading={setLoading} />
       ) : (

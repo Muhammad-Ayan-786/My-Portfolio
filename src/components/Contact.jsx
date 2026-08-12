@@ -12,7 +12,7 @@ const Contact = () => {
   useContactAnimation(contactRef)
 
   return (
-    <section ref={contactRef} id="contact" className="w-full border-b border-[#2b1200] bg-[#FAF9F5]">
+    <section ref={contactRef} id="contact" className="w-full border-b border-primary bg-background">
       <div className="contact-section max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-24 lg:pb-32 lg:pt-18">
         <div className="flex flex-col gap-16 lg:flex-row lg:items-start lg:gap-20">
 
@@ -22,11 +22,11 @@ const Contact = () => {
               CONTACT
             </p>
             {/* Heading */}
-            <h2 className="max-w-4xl text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] xl:text-[8.5rem] font-black uppercase leading-[0.8] tracking-[-0.06em] text-[#2b1200] contact-heading">
+            <h2 className="max-w-4xl text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] xl:text-[8.5rem] font-black uppercase leading-[0.8] tracking-[-0.06em] text-primary contact-heading">
               LET&apos;S TALK
             </h2>
             {/* Description */}
-            <p className="mt-6 max-w-xl text-base md:text-lg font-mono leading-relaxed text-[#2b1200] contact-description">
+            <p className="mt-6 max-w-xl text-base md:text-lg font-mono leading-relaxed text-primary contact-description">
               I&apos;m always interested in sharp ideas, ambitious builds, and collaborations that feel a little bit different.
             </p>
 
@@ -42,7 +42,7 @@ const Contact = () => {
                   <span className="mb-1 font-mono text-[0.65rem] uppercase tracking-[0.3em] text-neutral-600 contact-link-label">
                     {item.label}
                   </span>
-                  <span className="inline-block cursor-pointer text-2xl sm:text-3xl md:text-[2rem] font-black uppercase tracking-[-0.04em] text-[#2b1200] transition-colors hover:text-[#CCFF00] contact-link">
+                  <span className="inline-block cursor-pointer text-2xl sm:text-3xl md:text-[2rem] font-black uppercase tracking-[-0.04em] text-primary transition-colors hover:text-accent contact-link">
                     {item.value}
                   </span>
                 </a>
@@ -52,11 +52,11 @@ const Contact = () => {
 
           <div className="w-full max-w-md lg:ml-auto lg:mt-24">
             <div className="relative" id="contact-form-container">
-              <div className="absolute inset-0 translate-x-3 translate-y-3 border-2 border-[#2b1200] bg-[#CCFF00] z-0 contact-form-shadow" />
+              <div className="absolute inset-0 translate-x-3 translate-y-3 border-2 border-primary bg-accent z-0 contact-form-shadow" />
 
               <form
                 onSubmit={(e) => e.preventDefault()}
-                className="relative z-10 flex flex-col gap-5 border-2 border-[#2b1200] bg-[#FAF9F5] p-6 md:p-8 contact-form"
+                className="relative z-10 flex flex-col gap-5 border-2 border-primary bg-background p-6 md:p-8 contact-form"
               >
                 <div className="flex flex-col gap-2 contact-field">
                   <label htmlFor="name" className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-neutral-600">
@@ -66,7 +66,7 @@ const Contact = () => {
                     type="text"
                     id="name"
                     placeholder="Ayan"
-                    className="w-full border border-[#2b1200] bg-white px-4 py-3 font-mono text-sm text-[#2b1200] focus:outline-none focus:bg-zinc-50"
+                    className="w-full border border-primary bg-white px-4 py-3 font-mono text-sm text-primary focus:outline-none focus:bg-zinc-50"
                     required
                   />
                 </div>
@@ -79,7 +79,7 @@ const Contact = () => {
                     type="email"
                     id="email"
                     placeholder="you@example.com"
-                    className="w-full border border-[#2b1200] bg-white px-4 py-3 font-mono text-sm text-[#2b1200] focus:outline-none focus:bg-zinc-50"
+                    className="w-full border border-primary bg-white px-4 py-3 font-mono text-sm text-primary focus:outline-none focus:bg-zinc-50"
                     required
                   />
                 </div>
@@ -92,14 +92,14 @@ const Contact = () => {
                     id="message"
                     rows="5"
                     placeholder="Tell me about your project..."
-                    className="w-full resize-none border border-[#2b1200] bg-white px-4 py-3 font-mono text-sm text-[#2b1200] focus:outline-none focus:bg-zinc-50"
+                    className="w-full resize-none border border-primary bg-white px-4 py-3 font-mono text-sm text-primary focus:outline-none focus:bg-zinc-50"
                     required
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full border border-[#2b1200] bg-[#2b1200] px-4 py-3 text-center font-mono text-sm font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#CCFF00] hover:text-[#2b1200] contact-submit"
+                  className="w-full border border-primary bg-primary px-4 py-3 text-center font-mono text-sm font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-accent hover:text-primary contact-submit"
                   id="contact-submit-btn"
                 >
                   SEND MESSAGE

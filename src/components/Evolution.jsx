@@ -8,7 +8,7 @@ const Evolution = () => {
   useTimeLineAnimation(evolutionRef)
 
   return (
-    <section ref={evolutionRef} id="evolution" className="w-full  bg-[#FAF9F5]">
+    <section ref={evolutionRef} id="evolution" className="w-full  bg-background">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 flex flex-col items-center">
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 pt-24">
@@ -19,15 +19,15 @@ const Evolution = () => {
               04 / THE EVOLUTION
             </span>
 
-            <span className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase text-[#2b1200]/50">
+            <span className="font-mono text-xs md:text-sm tracking-[0.25em] uppercase text-primary/50">
               EVOLUTION / 2026
             </span>
           </div>
 
           {/* Giant Heading */}
-          <div className="relative border-t-2 border-b-2 border-[#2b1200] py-8 md:py-10">
-            <h2 className="evolution-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-none font-black tracking-tighter uppercase text-[#2b1200] text-center whitespace-nowrap">
-              EVOLUTION<span className="text-[#CCFF00]">.</span>
+          <div className="relative border-t-2 border-b-2 border-primary py-8 md:py-10">
+            <h2 className="evolution-heading text-6xl md:text-[8rem] lg:text-[10rem] leading-none font-black tracking-tighter uppercase text-primary text-center whitespace-nowrap">
+              EVOLUTION<span className="text-accent">.</span>
             </h2>
           </div>
 
@@ -35,13 +35,11 @@ const Evolution = () => {
 
 
 
-
-
         {/* Timeline Wrapper */}
         <div className="relative w-full max-w-4xl flex flex-col gap-16 md:gap-16">
 
           {/* Center line (only desktop/tablet) */}
-          <div className="timeline-line origin-top absolute left-5.75 md:left-1/2 top-0 bottom-0 w-0.5 bg-[#2b1200] -translate-x-1/2" />
+          <div className="timeline-line origin-top absolute left-5.75 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary -translate-x-1/2" />
 
           {timelineEntries.map((entry, idx) => (
             // Timeline Entry
@@ -56,8 +54,8 @@ const Evolution = () => {
               {/* Timeline Round Node Marker */}
               <div className="absolute left-5.75 md:left-1/2 -translate-x-1/2 z-20 flex items-center justify-center">
                 <div className={
-                  `timeline-marker w-4 h-4 border-2 border-[#2b1200] rounded-full
-                  ${entry.isGreen ? 'bg-[#CCFF00]' : 'bg-white'}`}
+                  `timeline-marker w-4 h-4 border-2 border-primary rounded-full
+                  ${entry.isGreen ? 'bg-accent' : 'bg-white'}`}
                 />
               </div>
 
@@ -72,10 +70,10 @@ const Evolution = () => {
                   <div className={`flex items-center gap-2 mb-1 ${entry.align === 'left' ? 'flex-row-reverse md:flex-row' : ''}`}>
 
                     {entry.isGreen ? (
-                      <span className="timeline-tag font-mono text-xs uppercase px-2 py-0.5 bg-[#CCFF00] border border-[#2b1200] font-bold">Current</span>
+                      <span className="timeline-tag font-mono text-xs uppercase px-2 py-0.5 bg-accent border border-primary font-bold">Current</span>
                     ) : null}
 
-                    <span className="timeline-tag font-mono text-xs uppercase bg-[#2b1200] text-white px-2 py-0.5 font-bold">
+                    <span className="timeline-tag font-mono text-xs uppercase bg-primary text-white px-2 py-0.5 font-bold">
                       {entry.year}
                     </span>
 

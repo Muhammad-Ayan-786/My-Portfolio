@@ -12,7 +12,8 @@ const Footer = () => {
   useFooterAnimation(footerRef)
 
   return (
-    <footer ref={footerRef} className="w-full bg-[#0e0600] text-white py-24 px-6 md:px-12 border-t border-[#2b1200]">
+    // <footer ref={footerRef} className="w-full bg-footer-background text-white py-24 px-6 md:px-12 border-t border-primary">
+    <footer ref={footerRef} className="w-full bg-[#0e0600] text-white py-24 px-6 md:px-12 border-t border-primary">
       <div className="footer-section max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-end">
 
         {/* Left Column: Heading + Links Stacked */}
@@ -22,7 +23,7 @@ const Footer = () => {
             <h2 className="footer-heading text-5xl md:text-8xl font-black tracking-tight leading-none uppercase">
               START THE
             </h2>
-            <h2 className="footer-heading text-5xl md:text-8xl font-black tracking-tight leading-none text-[#CCFF00] uppercase">
+            <h2 className="footer-heading text-5xl md:text-8xl font-black tracking-tight leading-none text-accent uppercase">
               DIALOGUE.
             </h2>
           </div>
@@ -36,7 +37,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-link text-white hover:text-[#CCFF00] transition-colors w-fit"
+                  className="footer-link text-white hover:text-accent transition-colors w-fit"
                   id={`footer-social-link-${idx}`}
                 >
                   {social.value}
@@ -49,7 +50,7 @@ const Footer = () => {
         {/* Right Column: Name + Subtitle */}
         <div className="flex flex-col items-start lg:items-end justify-end h-full" id="footer-right-col">
           <div className="flex flex-col items-start lg:items-end gap-2">
-            <span className="text-5xl md:text-7xl font-black tracking-tighter text-[#CCFF00] uppercase">
+            <span className="text-5xl md:text-7xl font-black tracking-tighter text-accent uppercase">
               {
                 ['M', 'O', 'H', 'D', ' ', 'A', 'Y', 'A', 'N'].map((letter, index) => (
                   <span key={index} className="letter">{letter}</span>
