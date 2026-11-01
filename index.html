@@ -1,19 +1,80 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ayan | Full-Stack Developer in the Making</title>
-    <meta name="description" content="Portfolio of Ayan, a Grade 11 student and full-stack developer passionate about building performant and visually compelling web applications." />
-    <!-- Google Fonts: Inter (sans-serif) & Space Mono (monospace) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- Apply the saved / preferred theme before first paint (no flash) -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('ma-theme')
+          var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+          document.documentElement.dataset.theme = theme
+        } catch (e) {}
+      })()
+    </script>
+
+    <title>Mohd Ayan — Full-Stack Engineer</title>
+    <meta name="description" content="Mohd Ayan is a full-stack engineer from Johannesburg building expressive interfaces, robust APIs and AI-powered products. Frontend → Backend → Generative AI → DevOps." />
+    <meta name="keywords" content="Mohd Ayan, Mohammad Ayan Asim, full-stack engineer, frontend developer, backend developer, generative AI, React, Node.js, Johannesburg, portfolio" />
+    <meta name="author" content="Mohammad Ayan Asim" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mohd-ayan-dev.vercel.app/" />
+
+    <!-- Theme colour for browser chrome -->
+    <meta name="theme-color" content="#0c0b10" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mohd Ayan" />
+    <meta property="og:title" content="Mohd Ayan — Full-Stack Engineer" />
+    <meta property="og:description" content="Expressive interfaces, robust APIs and AI-powered products. Frontend → Backend → Generative AI → DevOps." />
+    <meta property="og:url" content="https://mohd-ayan-dev.vercel.app/" />
+    <meta property="og:image" content="https://mohd-ayan-dev.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Mohd Ayan — Full-Stack Engineer" />
+    <meta property="og:locale" content="en_ZA" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mohd Ayan — Full-Stack Engineer" />
+    <meta name="twitter:description" content="Expressive interfaces, robust APIs and AI-powered products." />
+    <meta name="twitter:image" content="https://mohd-ayan-dev.vercel.app/og-image.png" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mohammad Ayan Asim",
+        "alternateName": "Mohd Ayan",
+        "jobTitle": "Full-Stack Engineer",
+        "url": "https://mohd-ayan-dev.vercel.app/",
+        "email": "mailto:mohd.ayanasim.786@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Johannesburg", "addressCountry": "ZA" },
+        "knowsAbout": ["React", "Node.js", "Express", "TypeScript", "MongoDB", "Generative AI", "DevOps"],
+        "sameAs": ["https://github.com/Muhammad-Ayan-786", "https://www.linkedin.com/in/mohammad-ayan-asim-12625338b/"]
+      }
+    </script>
+
+    <style>
+      /* Boot screen — matches the preloader so there's no flash before JS runs */
+      #boot { position: fixed; inset: 0; z-index: 9999; background: #0c0b10; }
+    </style>
   </head>
-  <body class="bg-[#FAF9F5] text-black selection:bg-[#CCFF00] selection:text-black">
+  <body>
+    <div id="boot" aria-hidden="true"></div>
     <div id="root"></div>
+    <noscript>This portfolio needs JavaScript for its animations. Contact: mohd.ayanasim.786@gmail.com</noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
-

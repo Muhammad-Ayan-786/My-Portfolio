@@ -1,113 +1,352 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
-/* Original Coloring - Brown & Cream */
-/* @theme {
-  --font-sans: "Inter", sans-serif;
-  --font-mono: "Space Mono", monospace;
-  --color-background: #FAF9F5;
-  --color-primary: #2b1200;
-  --color-accent: #CCFF00;
-  --color-footer-background: #0e0600;
-  --color-loader-cream: #d8d8d7;
-  --color-loader-brown: #241002;
-  --color-loader-dark-text: #1a0b00;
-  --color-white: #ffffff;
-  --color-black: #000000;
-  --color-neutral-600: oklch(43.9% 0 none);
-  --color-neutral-100: oklch(97% 0 none);
-  --color-zinc-50: oklch(98.5% 0 none);
-  --color-accent-rgba: rgba(204, 255, 0, 0.5);
-} */
+/* `dark:` utilities follow the data-theme attribute instead of the OS setting */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-@theme {
-  --font-sans: "Inter", sans-serif;
-  --font-mono: "Space Mono", monospace;
+/* ==========================================================================
+   DESIGN TOKENS — edit everything about the look of the site from here.
+   ========================================================================== */
+:root {
+  /* ---- The 4-colour palette ------------------------------------------- */
+  --c-ink: #0c0b10;     /* near-black with a violet undertone */
+  --c-bone: #f1ece2;    /* warm paper white                    */
+  --c-ember: #ff4a1c;   /* signal orange — primary accent      */
+  --c-violet: #7c5cff;  /* ultraviolet — secondary accent      */
 
-  /* Canvas */
-  --color-background: #F7F3E8;
+  /* ---- Semantic colours: LIGHT theme ----------------------------------- */
+  --bg: #efeae0;
+  --bg-elev: #e5dfd2;
+  --fg: #0c0b10;
+  --fg-muted: rgb(12 11 16 / 0.6);
+  --line: rgb(12 11 16 / 0.14);
+  --accent: #f0400f;
+  --accent-2: #5b3df5;
+  --on-accent: #0c0b10;
+  --selection: #ff4a1c;
 
-  /* Deep espresso brown */
-  --color-primary: #321500;
+  /* 3D hero blob colours (read by Three.js) */
+  --blob-a: #5b3df5;
+  --blob-b: #ff4a1c;
+  --blob-c: #f1ece2;
+  --particles: #0c0b10;
 
-  /* Hyper lime */
-  --color-accent: #C7FF00;
+  /* ---- Typography ------------------------------------------------------ */
+  --font-display: "Bricolage Grotesque Variable", "Arial Narrow", sans-serif;
+  --font-body: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-code: "JetBrains Mono Variable", ui-monospace, monospace;
 
-  /* Footer */
-  --color-footer-background: #180A00;
+  /* ---- Motion ---------------------------------------------------------- */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
-  /* Loader */
-  --color-loader-cream: #DED8C8;
-  /* --color-loader-brown: #321500; */
-  --color-loader-brown: #371700;
-  --color-loader-dark-text: #241000;
+  /* ---- Layout ---------------------------------------------------------- */
+  --gutter: clamp(1rem, 3.2vw, 2.75rem);
+  --nav-h: 76px;
 
-  --color-white: #ffffff;
-  --color-black: #000000;
-
-  --color-neutral-600: oklch(43.9% 0 none);
-  --color-neutral-100: oklch(97% 0 none);
-  --color-zinc-50: oklch(98.5% 0 none);
-
-  /* Lime glow */
-  --color-accent-rgba: rgba(199, 255, 0, 0.5);
+  color-scheme: light;
 }
 
+/* ---- Semantic colours: DARK theme -------------------------------------- */
+:root[data-theme="dark"] {
+  --bg: #0c0b10;
+  --bg-elev: #16141d;
+  --fg: #f1ece2;
+  --fg-muted: rgb(241 236 226 / 0.58);
+  --line: rgb(241 236 226 / 0.13);
+  --accent: #ff4a1c;
+  --accent-2: #8f74ff;
+  --on-accent: #0c0b10;
+  --selection: #7c5cff;
 
+  --blob-a: #2b1d78;
+  --blob-b: #ff4a1c;
+  --blob-c: #f1ece2;
+  --particles: #f1ece2;
+
+  color-scheme: dark;
+}
+
+/* Expose tokens to Tailwind: bg-bg, text-fg, border-line, text-accent ... */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--bg-elev);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-on-accent: var(--on-accent);
+  --color-ink: var(--c-ink);
+  --color-bone: var(--c-bone);
+  --color-ember: var(--c-ember);
+  --color-violet: var(--c-violet);
+
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-code);
+
+  --ease-expo: var(--ease-expo);
+  --ease-in-out-quart: var(--ease-in-out-quart);
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
 @layer base {
   html {
-    scroll-behavior: smooth;
+    background: var(--bg);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    font-family: var(--font-sans);
-    background-color: var(--color-background);
-    color: var(--color-black);
-    overflow-x: hidden;
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--fg);
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.5s var(--ease-expo), color 0.5s var(--ease-expo);
+  }
+
+  ::selection {
+    background: var(--selection);
+    color: var(--c-bone);
+  }
+
+  img {
+    user-select: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  input,
+  textarea,
+  select {
+    font: inherit;
   }
 }
 
-.hero-name .letter {
-  -webkit-text-stroke: 2px #FAF9F5;
-  paint-order: stroke fill;
-}
-
-.cursor-blink {
-  animation: blink 0.8s step-end infinite;
-}
-
-@keyframes blink {
-
-  0%,
-  50% {
-    opacity: 1;
+/* ==========================================================================
+   COMPONENT HELPERS
+   ========================================================================== */
+@layer components {
+  /* Giant condensed display type */
+  .type-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-stretch: 80%;
+    letter-spacing: -0.012em;
+    line-height: 0.84;
+    text-transform: uppercase;
   }
 
-  51%,
-  100% {
-    opacity: 0;
+  /* Elegant italic serif accent */
+  .type-serif {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    text-transform: none;
+  }
+
+  /* Tiny mono labels */
+  .type-label {
+    font-family: var(--font-code);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .container-x {
+    width: 100%;
+    padding-inline: var(--gutter);
+    margin-inline: auto;
+    max-width: 1680px;
+  }
+
+  /* Outline text */
+  .text-stroke {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--fg);
+  }
+
+  /* Text that rolls on hover (needs data-text attr + inner span) */
+  .roll {
+    display: inline-flex;
+    overflow: hidden;
+    position: relative;
+  }
+  .roll > span {
+    display: block;
+    transition: transform 0.6s var(--ease-expo);
+  }
+  .roll > span::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    color: inherit;
+  }
+  .roll:hover > span,
+  .group:hover .roll > span {
+    transform: translateY(-100%);
   }
 }
 
-/* Custom thin scrollbar */
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
+/* Film grain overlay */
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1.2s steps(6) infinite;
+}
+:root[data-theme="dark"] .grain {
+  opacity: 0.09;
+}
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-5%, 3%); }
+  40% { transform: translate(4%, -6%); }
+  60% { transform: translate(-3%, 7%); }
+  80% { transform: translate(6%, -2%); }
+}
+
+/* Footer name — solid, heavy letters (hover flips handled in LivingName.jsx) */
+.living-char {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 80%;
+  line-height: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  will-change: transform;
+}
+
+/* Hero "paint" — a gradient copy of each letter, revealed by a spotlight
+   at (--px, --py) local to the letter, with radius --pr inherited from the h1 */
+.paint-char {
+  position: relative;
+}
+.paint-char::after {
+  content: attr(data-ch);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background-image: linear-gradient(120deg, var(--c-ember) 10%, var(--c-violet) 55%, var(--accent) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-mask-image: radial-gradient(circle var(--pr, 0px) at var(--px, -999px) var(--py, -999px), #000 40%, transparent 100%);
+  mask-image: radial-gradient(circle var(--pr, 0px) at var(--px, -999px) var(--py, -999px), #000 40%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Pulsing status dot */
+.pulse-dot {
+  position: relative;
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: pulse 1.8s var(--ease-expo) infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+
+@keyframes scrollcue {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 16s linear infinite;
+}
+
+/* Custom cursor: hide the native one only on fine pointers */
+@media (hover: hover) and (pointer: fine) {
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* Theme switch — circular reveal via View Transitions API */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Native scrollbar — touch devices keep a slim accent one */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
 ::-webkit-scrollbar {
   width: 6px;
 }
-
-::-webkit-scrollbar-track {
-  background: var(--color-background);
-}
-
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-primary);
-  border-radius: 0;
+  background: var(--accent);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-accent);
+/* Desktop: the custom ScrollRail replaces it entirely */
+@media (min-width: 768px) {
+  html.has-rail {
+    scrollbar-width: none;
+  }
+  html.has-rail::-webkit-scrollbar {
+    display: none;
+  }
+}
+html.rail-dragging,
+html.rail-dragging * {
+  user-select: none !important;
 }
 
-/* Firefox */
-html {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-primary) var(--color-background);
+/* ScrollRail states: dim at rest, wake on scroll / hover */
+.scroll-rail .rail-track,
+.scroll-rail .rail-thumb {
+  transition: opacity 0.6s var(--ease-expo), width 0.5s var(--ease-expo), margin 0.5s var(--ease-expo);
+}
+.scroll-rail:not([data-active]):not(:hover) .rail-track {
+  opacity: 0.5;
+}
+.scroll-rail:not([data-active]):not(:hover) .rail-thumb {
+  opacity: 0.55;
+}
+.scroll-rail[data-active]:not(:hover) .rail-readout {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

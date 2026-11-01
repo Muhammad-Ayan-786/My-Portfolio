@@ -1,27 +1,37 @@
-export const timelineEntries = [
+/**
+ * Timeline on the About page — newest entry last.
+ * `current: true` highlights the entry you are living right now.
+ */
+export const journey = [
   {
-    year: 'Late 2025',
-    title: 'THE FOUNDATION',
-    desc: 'Started taking frontend development seriously. Building with HTML, CSS, JavaScript, React, and Tailwind while learning how real interfaces are put together.',
-    align: 'right',
+    period: 'Late 2025',
+    title: 'The Foundation',
+    description:
+      'Started taking development seriously. HTML, CSS, JavaScript, React and Tailwind — learning how real interfaces are put together, one component at a time.',
   },
   {
-    year: 'Early 2026',
-    title: 'BUILDING FOR REAL',
-    desc: 'Moved beyond tutorials into complete projects — working with APIs, React Router, forms, Context API, and reusable application architecture.',
-    align: 'left',
+    period: 'Early 2026',
+    title: 'Building for Real',
+    description:
+      'Moved past tutorials into complete projects: APIs, React Router, forms, Context API and reusable application architecture.',
   },
   {
-    year: 'Mid 2026',
-    title: 'STATE & SCALE',
-    desc: 'Diving deeper into Redux Toolkit and modern frontend patterns. Learning how to structure, manage, and scale application state.',
-    align: 'right',
+    period: 'Mid 2026',
+    title: 'State & Scale',
+    description:
+      'Went deep on Redux Toolkit, TanStack Query and modern frontend patterns — structuring, managing and scaling application state.',
   },
   {
-    year: 'Now',
-    title: 'EXPANDING THE STACK',
-    desc: 'Exploring TypeScript and stepping into the backend with Node.js, Express, and MongoDB — working toward becoming a full-stack developer.',
-    isGreen: true,
-    align: 'left',
+    period: '2026',
+    title: 'Crossing to the Server',
+    description:
+      'Stepped into the backend with Node.js, Express, TypeScript and MongoDB. Frontend and backend finally met — full stack, end to end.',
+  },
+  {
+    period: 'Now',
+    title: 'Teaching Software to Think',
+    description:
+      'Building with Generative AI — LLM APIs, prompt engineering, embeddings and retrieval-augmented generation. Next stop: DevOps.',
+    current: true,
   },
 ]
