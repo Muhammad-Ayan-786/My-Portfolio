@@ -24,7 +24,12 @@ export default function Footer() {
       gsap.fromTo(
         '.ft-inner',
         { yPercent: -35 },
-        { yPercent: 0, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom bottom', scrub: true } },
+        {
+          yPercent: 0,
+          ease: 'none',
+          // refreshPriority -1: measured after every pinned section above has added its scroll space
+          scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom bottom', scrub: true, refreshPriority: -1 },
+        },
       )
       gsap.from('.ft-letter', {
         yPercent: 100,

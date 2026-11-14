@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { Outlet, useLocation } from 'react-router'
 import { ScrollTrigger } from '../../lib/gsap'
 import { useLenis } from '../../context/SmoothScroll'
@@ -20,6 +20,30 @@ function ScrollReset() {
     const id = requestAnimationFrame(() => ScrollTrigger.refresh())
     return () => cancelAnimationFrame(id)
   }, [pathname, lenis])
+
+  // Keep every ScrollTrigger honest: re-measure when the page height really changes
+  // (late fonts, SplitText re-splits, lazy content) — otherwise scroll-linked effects
+  // near the bottom, like the footer reveal, start late or not at all.
+  useEffect(() => {
+    let timer = 0
+    let last = document.documentElement.scrollHeight
+    const refresh = () => {
+      clearTimeout(timer)
+      timer = setTimeout(() => ScrollTrigger.refresh(), 180)
+    }
+    const ro = new ResizeObserver(() => {
+      const h = document.documentElement.scrollHeight
+      if (Math.abs(h - last) < 2) return
+      last = h
+      refresh()
+    })
+    ro.observe(document.body)
+    document.fonts?.ready.then(refresh)
+    return () => {
+      clearTimeout(timer)
+      ro.disconnect()
+    }
+  }, [])
 
   return null
 }
