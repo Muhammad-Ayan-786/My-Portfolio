@@ -31,7 +31,7 @@ export const site = {
 
   availability: {
     open: true,
-    label: 'Available for freelance & internships',
+    label: 'Open to work — jobs, freelance & Shopify',
   },
 
   // What you are focused on right now (shown in hero + about page)

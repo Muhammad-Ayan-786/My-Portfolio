@@ -134,6 +134,14 @@ const statusStyle = {
   next: 'text-muted',
 }
 
+/** Stretch the last toolbox card so the 2- and 3-column grids never end with empty cells. */
+const fillLast = (i, n) => {
+  if (i !== n - 1) return ''
+  const sm = n % 2 ? 'sm:col-span-2' : ''
+  const lg = { 0: 'lg:col-span-1', 1: 'lg:col-span-3', 2: 'lg:col-span-2' }[n % 3]
+  return `${sm} ${lg}`
+}
+
 export default function About() {
   const now = roadmap.find((r) => r.status === 'current')
   const next = roadmap.find((r) => r.status === 'next')
@@ -143,7 +151,7 @@ export default function About() {
       <title>{`About — ${site.name}`}</title>
       <meta name="description" content={`About ${site.name}: a ${site.role.toLowerCase()} based in ${site.location.city}, now building with ${site.currently}.`} />
 
-      <PageHeader index="03" label="About" title="About" accent="the human behind the stack." aside={site.location.short} />
+      <PageHeader index="04" label="About" title="About" accent="the human behind the stack." aside={site.location.short} />
 
       {/* Intro */}
       <section className="container-x grid items-center gap-16 pb-24 md:grid-cols-12 md:pb-40">
@@ -223,7 +231,10 @@ export default function About() {
 
         <Reveal className="mt-16 grid gap-px overflow-hidden rounded-[1.75rem] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
           {skills.map((group, i) => (
-            <div key={group.id} className="group relative flex min-h-[280px] flex-col justify-between gap-10 overflow-hidden bg-bg p-7 md:p-9">
+            <div
+              key={group.id}
+              className={`group relative flex min-h-[280px] flex-col justify-between gap-10 overflow-hidden bg-bg p-7 md:p-9 ${fillLast(i, skills.length)}`}
+            >
               <span className="absolute inset-0 origin-bottom scale-y-0 bg-surface transition-transform duration-700 ease-expo group-hover:scale-y-100" />
               <div className="relative flex items-start justify-between">
                 <div>

@@ -28,6 +28,12 @@ export const journey = [
       'Stepped into the backend with Node.js, Express, TypeScript and MongoDB. Frontend and backend finally met — full stack, end to end.',
   },
   {
+    period: 'Oct 2026',
+    title: 'First Job — Shipping Stores',
+    description:
+      'Joined as a Shopify Developer. Within weeks: three live storefronts for real brands — Root & Bloom, Do’s & Donuts and Beverage Bank — with a fully 3D furniture experience, 47Home, on the bench.',
+  },
+  {
     period: 'Now',
     title: 'Teaching Software to Think',
     description:

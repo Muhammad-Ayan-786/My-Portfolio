@@ -4,6 +4,8 @@ import Manifesto from '../sections/home/Manifesto'
 import Tapes from '../sections/home/Tapes'
 import Path from '../sections/home/Path'
 import FeaturedWork from '../sections/home/FeaturedWork'
+import ClientWork from '../sections/home/ClientWork'
+import OpenTo from '../sections/home/OpenTo'
 
 export default function Home() {
   return (
@@ -13,7 +15,9 @@ export default function Home() {
       <Manifesto />
       <Tapes />
       <Path />
+      <ClientWork />
       <FeaturedWork />
+      <OpenTo />
     </>
   )
 }

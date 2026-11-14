@@ -23,6 +23,7 @@ export const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: 'work', lazy: page(() => import('./pages/Work')) },
       { path: 'work/:slug', lazy: page(() => import('./pages/ProjectDetail')), errorElement: <NotFound /> },
+      { path: 'services', lazy: page(() => import('./pages/Services')) },
       { path: 'about', lazy: page(() => import('./pages/About')) },
       { path: 'contact', lazy: page(() => import('./pages/Contact')) },
       { path: '*', Component: NotFound },

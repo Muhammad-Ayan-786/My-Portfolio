@@ -7,6 +7,11 @@ import { site } from '../data/site'
 import PageHeader from '../components/ui/PageHeader'
 import TransitionLink from '../components/ui/TransitionLink'
 import Reveal from '../components/ui/Reveal'
+import SectionLabel from '../components/ui/SectionLabel'
+import RevealText from '../components/ui/RevealText'
+import ClientCard from '../components/work/ClientCard'
+import Workshop from '../components/work/Workshop'
+import { clients, job } from '../data/clients'
 
 function ProjectCard({ project, index, total }) {
   return (
@@ -95,13 +100,54 @@ export default function Work() {
   return (
     <>
       <title>{`Work — ${site.name}`}</title>
-      <meta name="description" content={`Selected projects by ${site.name}: ${projects.map((p) => p.title).join(', ')}.`} />
+      <meta
+        name="description"
+        content={`Work by ${site.name}: live Shopify stores (${clients.map((c) => c.name).join(', ')}) and personal projects (${projects.map((p) => p.title).join(', ')}).`}
+      />
 
-      <PageHeader index="02" label="Selected work" title="Work" accent="built to be used." aside={`(${String(projects.length).padStart(2, '0')} projects)`}>
+      <PageHeader
+        index="02"
+        label="Work"
+        title="Work"
+        accent="built to be used."
+        aside={`(${String(clients.length).padStart(2, '0')} client · ${String(projects.length).padStart(2, '0')} personal)`}
+      >
+        <p className="max-w-[52ch] text-lg leading-relaxed text-fg/80">
+          Live Shopify stores I’ve built for real brands as a {job.title.toLowerCase()} — and the personal products, experiments and hackathon
+          builds that got me here, each one a step from frontend to full stack.
+        </p>
+      </PageHeader>
+
+      {/* Client work */}
+      <section className="container-x pb-28 md:pb-44" aria-labelledby="client-title">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <SectionLabel index="01">Client work</SectionLabel>
+            <RevealText as="h2" type="chars" id="client-title" className="type-display mt-8 text-[clamp(3.2rem,8vw,8.5rem)]">
+              Live on Shopify
+            </RevealText>
+          </div>
+          <p className="type-label max-w-[30ch] text-muted md:text-right">Hover a store to peek inside · click to visit the live site</p>
+        </div>
+        <Reveal className="mt-14 grid gap-x-8 gap-y-16 md:mt-20 md:grid-cols-2 xl:grid-cols-3" stagger={0.12}>
+          {clients.map((c, i) => (
+            <ClientCard key={c.slug} client={c} index={i} detailed />
+          ))}
+        </Reveal>
+        <Reveal className="mt-20 md:mt-28">
+          <Workshop />
+        </Reveal>
+      </section>
+
+      {/* Personal projects */}
+      <div className="container-x pb-14 md:pb-20">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <p className="max-w-[46ch] text-lg leading-relaxed text-fg/80">
-            A collection of products, experiments and hackathon builds — each one a step along the path from frontend to full stack.
-          </p>
+          <div>
+            <SectionLabel index="02">Personal projects</SectionLabel>
+            <RevealText as="h2" type="chars" className="type-display mt-8 text-[clamp(3.2rem,8vw,8.5rem)]">
+              Built to learn
+            </RevealText>
+          </div>
           <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter projects">
             {categories.map((c) => (
               <button
@@ -120,7 +166,7 @@ export default function Work() {
             ))}
           </div>
         </div>
-      </PageHeader>
+      </div>
 
       <section ref={ref} className="container-x pb-24 [perspective:1400px]" aria-label="Projects">
         {list.map((p) => (

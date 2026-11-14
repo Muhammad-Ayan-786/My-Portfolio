@@ -45,13 +45,13 @@ export default function FeaturedWork() {
     <section ref={ref} className="container-x py-28 md:py-44" aria-labelledby="work-title">
       <div className="mb-16 flex flex-col justify-between gap-8 md:mb-24 md:flex-row md:items-end">
         <div>
-          <SectionLabel index="03">Selected work</SectionLabel>
+          <SectionLabel index="04">Personal projects</SectionLabel>
           <RevealText as="h2" type="chars" id="work-title" className="type-display mt-8 text-[clamp(3.6rem,10vw,11rem)]">
             Things I’ve built
           </RevealText>
         </div>
         <Button to="/work" variant="outline">
-          All projects ({String(projects.length).padStart(2, '0')})
+          All work
         </Button>
       </div>
 

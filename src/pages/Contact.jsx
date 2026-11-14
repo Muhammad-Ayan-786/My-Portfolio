@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router'
 import { ArrowUpRight, Check, Copy, LoaderCircle } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { site } from '../data/site'
+import { INTERESTS } from '../data/services'
 import PageHeader from '../components/ui/PageHeader'
 import Reveal from '../components/ui/Reveal'
 import SectionLabel from '../components/ui/SectionLabel'
 import LocalTime from '../components/ui/LocalTime'
 import Magnetic from '../components/ui/Magnetic'
 
-const INTERESTS = ['Freelance project', 'Internship', 'Collaboration', 'Just saying hi']
 
 const pop = { initial: { opacity: 0, scale: 0.6 }, animate: { opacity: 1, scale: 1 }, exit: { opacity: 0, scale: 0.6 } }
 const slide = { initial: { opacity: 0, y: 30 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: -30 } }
@@ -60,7 +61,9 @@ function Field({ id, label, textarea, error, ...rest }) {
 }
 
 export default function Contact() {
-  const [interest, setInterest] = useState(INTERESTS[0])
+  // /contact?interest=Shopify%20store pre-selects a pill (links from Services / Home)
+  const [params] = useSearchParams()
+  const [interest, setInterest] = useState(() => (INTERESTS.includes(params.get('interest')) ? params.get('interest') : INTERESTS[0]))
   const [copied, setCopied] = useState(false)
   // idle → sending → sent | error
   const [status, setStatus] = useState('idle')
@@ -132,7 +135,7 @@ export default function Contact() {
       <title>{`Contact — ${site.name}`}</title>
       <meta name="description" content={`Get in touch with ${site.name} for freelance work, internships or collaborations.`} />
 
-      <PageHeader index="04" label="Contact" title="Let’s talk" accent="about what you’re building." aside={<LocalTime />} />
+      <PageHeader index="05" label="Contact" title="Let’s talk" accent="about what you’re building." aside={<LocalTime />} />
 
       <section className="container-x grid gap-20 pb-32 md:grid-cols-12 md:pb-44">
         {/* Left: direct lines */}

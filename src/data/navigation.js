@@ -5,6 +5,7 @@
 export const navigation = [
   { label: 'Home', to: '/' },
   { label: 'Work', to: '/work' },
+  { label: 'Services', to: '/services' },
   { label: 'About', to: '/about' },
   { label: 'Contact', to: '/contact' },
 ]

@@ -12,7 +12,8 @@
  *                               deliver to the email your Resend account was created with
  */
 
-const INTERESTS = ['Freelance project', 'Internship', 'Collaboration', 'Just saying hi']
+import { INTERESTS } from '../src/data/services.js'
+
 const LIMITS = { name: 80, email: 160, message: 5000 }
 const MIN_MESSAGE = 10
 const MIN_FILL_MS = 3000 // humans need more than 3s to fill the form

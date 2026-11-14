@@ -4,12 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Personal portfolio of **Mohd Ayan** — full-stack engineer (Frontend ✓ → Backend ✓ → Generative AI now → DevOps next).
+Personal portfolio of **Mohd Ayan** — full-stack engineer (Frontend ✓ → Backend ✓ → Generative AI now → DevOps next), working full-time as a Shopify Developer and open to jobs + freelance.
 Live at https://mohd-ayan-dev.vercel.app (Vercel). Heavily animated, light + dark themes, desktop and mobile.
 
 **Pages / sections**
-- `/` Home — Hero (3D blob + split name), Manifesto, Tapes (skill marquees), Path (4-stage roadmap, pinned horizontal scroll on desktop), Featured work
-- `/work` — all projects · `/work/:slug` — case study (unknown slug → 404 via loader)
+- `/` Home — Hero (3D blob + split name), Manifesto, Tapes (skill marquees), Path (4-stage roadmap, pinned horizontal scroll on desktop), Day job (client stores fan out on scroll + 47Home workshop card), Personal projects, Open to work (word-roll)
+- `/work` — client stores (live Shopify sites) + personal projects · `/work/:slug` — personal-project case study (unknown slug → 404 via loader)
+- `/services` — "Hire me": offers (hover-expand rows), for-recruiters card, process
 - `/about` — intro, now & next, journey timeline, toolbox, principles
 - `/contact` — direct email/socials + form backed by `api/contact.js`
 - Global: preloader, custom cursor, custom scrollbar ("ScrollRail"), navbar, curtain page transitions, footer with hover-animated name
@@ -38,12 +39,13 @@ public/               favicons, og-image, manifest, robots/sitemap, projects/*.w
 src/
   data/               ← ALL site content (see below). Edit here, not in components.
   pages/              one file per route (+ NotFound, ErrorPage)
-  sections/home/      Home page sections (Hero, Manifesto, Tapes, Path, FeaturedWork)
+  sections/home/      Home page sections (Hero, Manifesto, Tapes, Path, ClientWork, FeaturedWork, OpenTo)
   components/
     layout/           global chrome: RootLayout, Preloader, Cursor, ScrollRail, Navbar, MobileMenu, Footer, ThemeToggle
     ui/               reusable bits: RevealText, Reveal, ScrubText, Magnetic, Marquee, Button, TransitionLink,
                       PageHeader, SectionLabel, TiltCard, LivingName (footer name), LocalTime, Logo
     three/            HeroScene (WebGL blob)
+    work/             ClientCard (browser-framed live store), Workshop (in-progress build, CSS-3D cubes)
   context/            Theme, SmoothScroll (Lenis), App (load state), Transition (page curtains)
   lib/gsap.js         the ONLY place gsap plugins are registered/imported from
   router.jsx          route table
@@ -57,6 +59,8 @@ Components render from these files; to change content, edit data only.
 | File | Drives |
 |---|---|
 | `site.js` | name, role, tagline, email, socials, résumé link (Google Drive URL; `null` hides all résumé buttons), location/time zone, availability, current/next focus |
+| `clients.js` | `job` (current role), `clients` (live stores → Home Day job + Work), `workshop` (in-progress build; `null` hides it). Screenshots: `public/clients/*.webp`, 1920×1080, cover + `gallery` hover image |
+| `services.js` | offers on `/services` + Home "Open to work", `INTERESTS` for the contact form, process `steps` |
 | `projects.js` | Home featured list (`featured: true`), `/work` cards, `/work/:slug` pages. `slug` must be unique. Images: `public/projects/*.webp`, **1920×1080** |
 | `roadmap.js` | the 4 stages; `status` (`complete`/`current`/`next`) + `progress` feed badges, stats and the hero |
 | `skills.js` | About toolbox + Home skill tapes |
@@ -93,7 +97,7 @@ Components render from these files; to change content, edit data only.
 
 ## Easy to break / non-obvious
 
-- **Form ↔ function contract:** field names (`name`, `email`, `message`, `interest`, `website`, `elapsed`), the `INTERESTS` list and length limits are duplicated in `src/pages/Contact.jsx` and `api/contact.js` — change both together.
+- **Form ↔ function contract:** field names (`name`, `email`, `message`, `interest`, `website`, `elapsed`) and length limits are duplicated in `src/pages/Contact.jsx` and `api/contact.js` — change both together. `INTERESTS` is single-sourced in `src/data/services.js` (the API imports it via `../src/data/services.js`, so keep that file free of browser-only code). `/contact?interest=<value>` pre-selects a pill.
 - **`vercel.json` rewrite** sends every non-file path to `index.html` but must keep excluding `api/`, or the form receives HTML instead of JSON.
 - **Domain is hardcoded** in `index.html` (canonical, OG/Twitter, JSON-LD), `public/sitemap.xml` and `public/robots.txt`. Update all of them if the URL changes; add new routes to the sitemap. JSON-LD in `index.html` also duplicates personal info from `site.js`.
 - **Adding a page:** route in `router.jsx` (lazy via `page()`), entry in `navigation.js`, open it with `PageHeader` + `SectionLabel`s, add its own `<title>`/`<meta>` (React 19 renders them into `<head>`), and add it to the sitemap.
