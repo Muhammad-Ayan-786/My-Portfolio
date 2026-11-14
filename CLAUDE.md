@@ -8,7 +8,7 @@ Personal portfolio of **Mohd Ayan** — full-stack engineer (Frontend ✓ → Ba
 Live at https://mohd-ayan-dev.vercel.app (Vercel). Heavily animated, light + dark themes, desktop and mobile.
 
 **Pages / sections**
-- `/` Home — Hero (sticky stage: 3D blob framed by the split name; the rest of the page is a rounded sheet that slides over it), IntroDock (tagline, path, CTAs at the top of the sheet), Manifesto, Tapes (skill marquees), Path (4-stage roadmap, pinned horizontal scroll on desktop), Day job (pinned browser-window showcase that flips through the client stores on scroll + 47Home workshop card), Personal projects, Open to work (word-roll)
+- `/` Home — Hero (sticky stage: an illustrated character whose eyes and head follow the cursor, framed by the split name; the rest of the page is a rounded sheet that slides over it), IntroDock (tagline, path, CTAs at the top of the sheet), Manifesto, Tapes (skill marquees), Path (4-stage roadmap, pinned horizontal scroll on desktop), Day job (pinned browser-window showcase that flips through the client stores on scroll + 47Home workshop card), Personal projects, Open to work (word-roll)
 - `/work` — client stores (zig-zag editorial rows) + personal projects · `/work/:slug` — personal-project case study (unknown slug → 404 via loader)
 - `/services` — "Hire me": offers (hover-expand rows), for-recruiters card, process
 - `/about` — intro, now & next, journey timeline, toolbox, principles
@@ -44,7 +44,8 @@ src/
     layout/           global chrome: RootLayout, Preloader, Cursor, ScrollRail, Navbar, MobileMenu, Footer, ThemeToggle
     ui/               reusable bits: RevealText, Reveal, ScrubText, Magnetic, Marquee, Button, TransitionLink,
                       PageHeader, SectionLabel, TiltCard, LivingName (footer name), LocalTime, Logo
-    three/            HeroScene (WebGL blob)
+    hero/             Character (hero character: head + body cut-outs, SVG eyes that track the cursor, blink, breathing)
+    three/            HeroScene (WebGL blob — the previous hero centrepiece, currently not mounted)
     work/             BrowserFrame (macOS window, colours from `--brand`), ClientRow (editorial store row), Workshop (in-progress build, CSS-3D cubes)
   context/            Theme, SmoothScroll (Lenis), App (load state), Transition (page curtains)
   lib/gsap.js         the ONLY place gsap plugins are registered/imported from
@@ -103,7 +104,8 @@ Components render from these files; to change content, edit data only.
 - **Adding a page:** route in `router.jsx` (lazy via `page()`), entry in `navigation.js`, open it with `PageHeader` + `SectionLabel`s, add its own `<title>`/`<meta>` (React 19 renders them into `<head>`), and add it to the sitemap.
 - **Pinned ScrollTriggers** on Home: `Path.jsx` (horizontal) and `ClientWork.jsx` (store showcase; its length is `STEP × stores`). `ScrollReset` in `RootLayout` refreshes on route change *and* whenever document height changes (fonts, split text, lazy content); the footer reveal uses `refreshPriority: -1` so it is measured after the pins. New scroll effects near the page bottom should do the same.
 - **`Reveal` animates `opacity`, not `autoAlpha`,** on purpose — `visibility: hidden` would make content unreachable by keyboard Tab.
-- **Home hero is `position: sticky`** and `.home-sheet` (in `pages/Home.jsx`) slides over it; `Hero.jsx` sets the hero `invisible` and stops WebGL once fully covered. Keep new Home sections inside `.home-sheet`. The ScrollRail "Intro" mark is a zero-height span before the hero because a sticky element can't be measured.
+- **Home hero is `position: sticky`** and `.home-sheet` (in `pages/Home.jsx`) slides over it; `Hero.jsx` sets the hero `invisible` and stops WebGL once fully covered. Keep new Home sections inside `.home-sheet`. On phones the hero text sits above the character (`max-md:z-10`), on desktop the character is in front of the name. The ScrollRail "Intro" mark is a zero-height span before the hero because a sticky element can't be measured.
+- **Hero character (`components/hero/Character.jsx`)**: `public/character/head.webp` + `body.webp` are two cut-outs on the same 736×1010 canvas (exported at 2×); the head pivots at `NECK`. The eyes are redrawn in SVG over the artwork — `EYES` holds each eye's opening path and iris centre/radius in the artwork's pixel space, `ART` the sampled colours. Replacing the artwork means re-measuring those constants. `public/character/3image.png` is the original artwork the cut-outs were made from (kept for reference; the page does not load it).
 - **Cursor ring size uses width/height, not `scale`,** so labels stay sharp.
 - **Logo / favicons:** the "Ma" monogram (Bricolage 800 condensed M + Instrument Serif italic a) is stored as baked SVG paths, identical in `components/ui/Logo.jsx` and `public/favicon.svg`. The favicon wraps them in an "aurora" tile (violet + ember corner light, glass rim, glowing a); `favicon-32.png`, `icon-192/512.png` and the full-bleed `apple-touch-icon.png` are renders of that SVG. Change them together.
 - **React hooks lint is strict:** no ref reads during render, no setState in effects. Use CSS variables written from effects or tickers (see ScrollRail's `--th`), or the prev-value pattern.

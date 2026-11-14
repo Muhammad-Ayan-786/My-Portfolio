@@ -1,10 +1,9 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap, ScrollTrigger, useGSAP, prefersReducedMotion } from '../../lib/gsap'
 import { useIntro } from '../../context/App'
 import { site } from '../../data/site'
 import LocalTime from '../../components/ui/LocalTime'
-
-const HeroScene = lazy(() => import('../../components/three/HeroScene'))
+import Character from '../../components/hero/Character'
 
 const Chars = ({ text }) =>
   text.split('').map((ch, i) => (
@@ -15,7 +14,7 @@ const Chars = ({ text }) =>
 
 /**
  * The hero is a fixed stage: it sticks to the viewport while the rest of the page
- * (.home-sheet in pages/Home.jsx) slides up over it. Only the name, the creature and
+ * (.home-sheet in pages/Home.jsx) slides up over it. Only the name, the character and
  * the essentials live here — tagline, path and buttons sit at the top of the sheet (IntroDock).
  */
 export default function Hero() {
@@ -77,7 +76,7 @@ export default function Hero() {
       gsap
         .timeline({ delay })
         .from('.hero-char', { yPercent: 118, rotate: 6, duration: 1.7, stagger: 0.05, ease: 'expo.out' })
-        .from('.hero-canvas', { scale: 0.2, yPercent: 40, autoAlpha: 0, duration: 2.2, ease: 'elastic.out(1, 0.75)' }, 0.25)
+        .from('.hero-canvas', { yPercent: 45, autoAlpha: 0, duration: 1.8, ease: 'expo.out' }, 0.2)
         .from('.hero-line', { scaleX: 0, duration: 1.6, ease: 'expo.inOut' }, 0.3)
         .from('.hero-fade', { autoAlpha: 0, y: 24, duration: 1.2, stagger: 0.07 }, 0.7)
     },
@@ -98,7 +97,7 @@ export default function Hero() {
         gsap.to('.hero-row-1', { xPercent: -10, ease: 'none', scrollTrigger: st })
         gsap.to('.hero-row-2', { xPercent: 8, ease: 'none', scrollTrigger: st })
         gsap.to('.hero-stage', { scale: 0.9, yPercent: -4, ease: 'none', scrollTrigger: st })
-        gsap.to('.hero-canvas-wrap', { yPercent: 14, ease: 'none', scrollTrigger: st })
+        gsap.to('.hero-canvas-wrap', { yPercent: 6, ease: 'none', scrollTrigger: st })
         gsap.to('.hero-dim', { opacity: 0.6, ease: 'none', scrollTrigger: st })
       }
       ScrollTrigger.create({ trigger: sheet, start: 'top bottom', end: 'top top', onLeave: () => cover(true), onEnterBack: () => cover(false) })
@@ -117,7 +116,7 @@ export default function Hero() {
         className={`sticky top-0 z-0 h-[100svh] min-h-[600px] overflow-hidden ${covered ? 'invisible' : ''}`}
       >
         <div className="hero-stage relative h-full origin-top">
-          <div className="container-x relative flex h-full flex-col justify-between pb-6 pt-[calc(var(--nav-h)+1.5rem)] md:pb-8">
+          <div className="container-x relative flex h-full flex-col justify-between pb-6 pt-[calc(var(--nav-h)+1.5rem)] max-md:z-10 md:pb-8">
             {/* Meta row */}
             <div className="type-label grid grid-cols-2 gap-4 text-muted md:grid-cols-3">
               <span className="hero-fade">(Portfolio — {new Date().getFullYear()})</span>
@@ -129,7 +128,7 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* Name — split to frame the creature: first name top-left, last name bottom-right */}
+            {/* Name — split to frame the character: first name top-left, last name bottom-right */}
             <h1
               ref={nameRef}
               className="type-display relative flex flex-1 select-none flex-col justify-between py-[3svh] text-[length:clamp(4.6rem,min(22vw,25svh),23rem)]"
@@ -165,14 +164,14 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* The creature — in front of the name */}
-          <div className="hero-canvas-wrap pointer-events-none absolute inset-0 flex items-center justify-center">
-            <div className="hero-canvas relative aspect-square w-[min(118vw,62svh)] max-w-none md:w-[min(60vw,84svh,900px)]">
-              <div className="absolute inset-[20%] rounded-full bg-accent/25 blur-[90px]" />
-              <Suspense fallback={null}>
-                <HeroScene active={play && !covered} className="absolute inset-0" />
-              </Suspense>
+          {/* The character — stands at the bottom edge; in front of the name on desktop, behind the text on phones */}
+          <div className="hero-canvas-wrap pointer-events-none absolute inset-0 flex items-end justify-center">
+            <div className="hero-canvas relative h-[70svh] shrink-0 md:h-[90svh]">
+              <div className="absolute inset-x-[4%] top-[10%] aspect-square rounded-full bg-accent/20 blur-[110px]" />
+              <Character active={play && !covered} className="h-full" />
             </div>
+            {/* phones: the text sits over him, so fade his sweater into the page behind it */}
+            <div className="absolute inset-x-0 bottom-0 h-[36svh] bg-gradient-to-t from-bg via-bg/85 to-transparent md:hidden" />
           </div>
         </div>
 
