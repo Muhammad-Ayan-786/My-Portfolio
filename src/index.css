@@ -255,6 +255,25 @@
   pointer-events: none;
 }
 
+/* "Ma" logo — the italic a tips like a pen stroke when its link is hovered */
+.logo-mark {
+  overflow: visible;
+}
+.logo-mark .lm-a,
+.logo-mark .lm-m {
+  transform-box: fill-box;
+  transition: transform 0.8s var(--ease-expo);
+}
+.logo-mark .lm-a {
+  transform-origin: 30% 95%;
+}
+.group:hover .logo-mark .lm-a {
+  transform: rotate(-16deg) translate(6%, -6%);
+}
+.group:hover .logo-mark .lm-m {
+  transform: translateY(-4%);
+}
+
 /* 47Home workshop card — blueprint grid + CSS-3D wireframe cubes */
 .blueprint {
   background-image:

@@ -23,7 +23,7 @@ function IdCard() {
       <div className="pointer-events-none absolute -bottom-1/3 -left-1/4 size-[80%] rounded-full bg-accent-2/35 blur-[70px]" />
       <div className="relative flex h-full flex-col justify-between [transform:translateZ(40px)]">
         <div className="flex items-start justify-between">
-          <Logo className="size-10 text-fg" />
+          <Logo className="w-14 text-fg" />
           <span className="type-label rounded-full border border-line px-3 py-1.5">Dev ID — {new Date().getFullYear()}</span>
         </div>
         <div>

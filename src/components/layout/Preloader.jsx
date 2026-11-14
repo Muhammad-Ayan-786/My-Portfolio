@@ -172,7 +172,7 @@ export default function Preloader() {
           <div className="type-label flex items-start justify-between gap-4">
             <div className="flex items-center gap-3 overflow-hidden">
               <span className="pl-in inline-flex items-center gap-3">
-                <Logo className="size-6 text-bone" />
+                <Logo className="w-8 text-bone" />
                 {site.name}
               </span>
             </div>

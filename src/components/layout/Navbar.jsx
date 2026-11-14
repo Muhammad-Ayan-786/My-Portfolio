@@ -63,8 +63,8 @@ export default function Navbar() {
         <nav className="container-x flex h-[var(--nav-h)] items-center justify-between gap-4" aria-label="Main">
           {/* Brand */}
           <TransitionLink to="/" className="nav-item group flex items-center gap-3" aria-label={`${site.name} — home`}>
-            <span className="grid size-11 place-items-center rounded-full border border-line bg-bg/60 backdrop-blur-md transition-transform duration-700 ease-expo group-hover:rotate-[360deg]">
-              <Logo className="size-5 text-fg" />
+            <span className="grid size-11 place-items-center rounded-full border border-line bg-bg/60 backdrop-blur-md transition-colors duration-500 group-hover:border-fg">
+              <Logo className="w-6 text-fg" />
             </span>
             <span className="type-label hidden sm:flex flex-col leading-tight">
               <span className="roll">
