@@ -22,18 +22,26 @@ export default function OpenTo() {
       if (prefersReducedMotion() || words.length < 2) return
       gsap.set(words, { yPercent: 110 })
       gsap.set(words[0], { yPercent: 0 })
-      const tl = gsap.timeline({ repeat: -1, paused: true })
-      words.forEach((w, i) => {
-        const next = words[(i + 1) % words.length]
-        tl.to(w, { yPercent: -110, duration: 0.8, ease: 'expo.inOut' }, `+=1.4`)
-          .fromTo(next, { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: 'expo.inOut' }, '<')
-      })
+
+      // A self-scheduling chain instead of a repeating timeline: every step swaps
+      // current → next in one motion, so the wrap from the last phrase back to the
+      // first is identical to every other step (no blank beat at the loop seam).
+      let i = 0
+      const swap = () => {
+        const cur = words[i]
+        i = (i + 1) % words.length
+        gsap.to(cur, { yPercent: -110, duration: 0.8, ease: 'expo.inOut', overwrite: true })
+        gsap.fromTo(words[i], { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: 'expo.inOut', overwrite: true })
+        next.restart(true)
+      }
+      const next = gsap.delayedCall(2.2, swap).pause()
+
       // only spin while on screen
       ScrollTrigger.create({
         trigger: ref.current,
         start: 'top bottom',
         end: 'bottom top',
-        onToggle: (self) => (self.isActive ? tl.play() : tl.pause()),
+        onToggle: (self) => (self.isActive ? next.restart(true) : next.pause()),
       })
     },
     { scope: ref },
