@@ -1,11 +1,7 @@
-import { lazy, Suspense, useEffect, useRef } from 'react'
-import { Check } from 'lucide-react'
-import { gsap, useGSAP, prefersReducedMotion } from '../../lib/gsap'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { gsap, ScrollTrigger, useGSAP, prefersReducedMotion } from '../../lib/gsap'
 import { useIntro } from '../../context/App'
 import { site } from '../../data/site'
-import { roadmap } from '../../data/roadmap'
-import Button from '../../components/ui/Button'
-import RevealText from '../../components/ui/RevealText'
 import LocalTime from '../../components/ui/LocalTime'
 
 const HeroScene = lazy(() => import('../../components/three/HeroScene'))
@@ -17,25 +13,16 @@ const Chars = ({ text }) =>
     </span>
   ))
 
-function StageIcon({ status }) {
-  if (status === 'complete')
-    return (
-      <span className="grid size-4 place-items-center rounded-full bg-fg text-bg">
-        <Check className="size-2.5" strokeWidth={3.5} />
-      </span>
-    )
-  if (status === 'current')
-    return (
-      <span className="grid size-4 place-items-center">
-        <span className="pulse-dot size-2 rounded-full bg-accent" />
-      </span>
-    )
-  return <span className="size-4 rounded-full border border-dashed border-muted" />
-}
-
+/**
+ * The hero is a fixed stage: it sticks to the viewport while the rest of the page
+ * (.home-sheet in pages/Home.jsx) slides up over it. Only the name, the creature and
+ * the essentials live here — tagline, path and buttons sit at the top of the sheet (IntroDock).
+ */
 export default function Hero() {
   const ref = useRef(null)
   const nameRef = useRef(null)
+  const coveredRef = useRef(false)
+  const [covered, setCovered] = useState(false) // true once the sheet hides the hero completely
   const { play, delay } = useIntro()
 
   // "Paint" spotlight: the cursor reveals a gradient inside the solid letters.
@@ -55,6 +42,7 @@ export default function Hero() {
     }
 
     const tick = (time) => {
+      if (coveredRef.current) return
       const b = h1.getBoundingClientRect()
       const size = parseFloat(getComputedStyle(h1).fontSize)
       const tx = pointer.inside ? pointer.x : b.left + b.width * (0.5 + 0.45 * Math.sin(time * 0.32))
@@ -74,16 +62,9 @@ export default function Hero() {
       })
     }
 
-    let running = false
-    const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !running) gsap.ticker.add(tick)
-      if (!entry.isIntersecting && running) gsap.ticker.remove(tick)
-      running = entry.isIntersecting
-    })
-    io.observe(h1)
+    gsap.ticker.add(tick)
     window.addEventListener('pointermove', onMove, { passive: true })
     return () => {
-      io.disconnect()
       gsap.ticker.remove(tick)
       window.removeEventListener('pointermove', onMove)
     }
@@ -96,120 +77,107 @@ export default function Hero() {
       gsap
         .timeline({ delay })
         .from('.hero-char', { yPercent: 118, rotate: 6, duration: 1.7, stagger: 0.05, ease: 'expo.out' })
-        .from('.hero-serif', { yPercent: 130, duration: 1.4, ease: 'expo.out' }, '<0.35')
-        .from('.hero-canvas', { scale: 0.4, autoAlpha: 0, duration: 2.4, ease: 'expo.out' }, 0)
+        .from('.hero-canvas', { scale: 0.2, yPercent: 40, autoAlpha: 0, duration: 2.2, ease: 'elastic.out(1, 0.75)' }, 0.25)
         .from('.hero-line', { scaleX: 0, duration: 1.6, ease: 'expo.inOut' }, 0.3)
         .from('.hero-fade', { autoAlpha: 0, y: 24, duration: 1.2, stagger: 0.07 }, 0.7)
     },
     { scope: ref, dependencies: [play] },
   )
 
-  // Scroll parallax
+  // The sheet slides over: the stage sinks back, dims, and switches off once fully covered
   useGSAP(
     () => {
-      if (prefersReducedMotion()) return
-      const st = { trigger: ref.current, start: 'top top', end: 'bottom top', scrub: true }
-      gsap.to('.hero-row-1', { xPercent: -14, ease: 'none', scrollTrigger: st })
-      gsap.to('.hero-row-2', { xPercent: 10, ease: 'none', scrollTrigger: st })
-      gsap.to('.hero-canvas-wrap', { yPercent: 30, scale: 0.75, ease: 'none', scrollTrigger: st })
-      // Only starts fading once you've genuinely scrolled away, so it's never half-visible at rest
-      gsap.to('.hero-bottom', { yPercent: -40, autoAlpha: 0, ease: 'none', scrollTrigger: { ...st, start: '18% top', end: '60% top' } })
+      const sheet = document.querySelector('.home-sheet')
+      if (!sheet) return
+      const cover = (v) => {
+        coveredRef.current = v
+        setCovered(v)
+      }
+      const st = { trigger: sheet, start: 'top bottom', end: 'top top', scrub: true }
+      if (!prefersReducedMotion()) {
+        gsap.to('.hero-row-1', { xPercent: -10, ease: 'none', scrollTrigger: st })
+        gsap.to('.hero-row-2', { xPercent: 8, ease: 'none', scrollTrigger: st })
+        gsap.to('.hero-stage', { scale: 0.9, yPercent: -4, ease: 'none', scrollTrigger: st })
+        gsap.to('.hero-canvas-wrap', { yPercent: 14, ease: 'none', scrollTrigger: st })
+        gsap.to('.hero-dim', { opacity: 0.6, ease: 'none', scrollTrigger: st })
+      }
+      ScrollTrigger.create({ trigger: sheet, start: 'top bottom', end: 'top top', onLeave: () => cover(true), onEnterBack: () => cover(false) })
     },
     { scope: ref },
   )
 
   return (
-    <section ref={ref} className="relative h-[100svh] min-h-[600px] overflow-hidden" aria-label="Introduction" data-rail-mark="Intro" data-rail-index="00">
-      {/* 3D */}
-      <div className="hero-canvas-wrap pointer-events-none absolute inset-0 flex items-center justify-center">
-        <div className="hero-canvas relative aspect-square w-[125vw] max-w-none translate-y-[-6%] md:w-[min(66vw,92svh,980px)] md:translate-y-[-5%]">
-          <div className="absolute inset-[18%] rounded-full bg-accent/25 blur-[90px]" />
-          <Suspense fallback={null}>
-            <HeroScene active={play} className="absolute inset-0" />
-          </Suspense>
-        </div>
-      </div>
+    <>
+      {/* ScrollRail marker — the section below is sticky, so it can't be measured itself */}
+      <span data-rail-mark="Intro" data-rail-index="00" aria-hidden="true" className="block h-0" />
 
-      <div className="container-x relative flex h-full flex-col justify-between pb-6 pt-[calc(var(--nav-h)+1.5rem)] md:pb-8">
-        {/* Meta row */}
-        <div className="type-label grid grid-cols-2 gap-4 text-muted md:grid-cols-3">
-          <span className="hero-fade">(Portfolio — {new Date().getFullYear()})</span>
-          <span className="hero-fade hidden text-center md:block">
-            Currently → <span className="text-fg">{site.currently}</span>
-          </span>
-          <span className="hero-fade text-right">
-            <LocalTime /> · {site.location.short}
-          </span>
-        </div>
-
-        {/* Name */}
-        <h1 ref={nameRef} className="type-display relative select-none text-[length:clamp(4.6rem,min(22vw,27svh),23rem)]" aria-label={`${site.name} — ${site.role}`}>
-          <span className="hero-row-1 flex items-end overflow-hidden pb-[0.04em]" aria-hidden="true">
-            <Chars text={site.firstName.toUpperCase()} />
-            <span className="ml-[0.08em] mb-[0.12em] hidden overflow-hidden pb-1 text-[0.17em] leading-none sm:inline-block">
-              <span className="hero-serif type-serif inline-block text-accent">
-                full-stack
-                <br />
-                engineer
+      <section
+        ref={ref}
+        aria-label="Introduction"
+        className={`sticky top-0 z-0 h-[100svh] min-h-[600px] overflow-hidden ${covered ? 'invisible' : ''}`}
+      >
+        <div className="hero-stage relative h-full origin-top">
+          <div className="container-x relative flex h-full flex-col justify-between pb-6 pt-[calc(var(--nav-h)+1.5rem)] md:pb-8">
+            {/* Meta row */}
+            <div className="type-label grid grid-cols-2 gap-4 text-muted md:grid-cols-3">
+              <span className="hero-fade">(Portfolio — {new Date().getFullYear()})</span>
+              <span className="hero-fade hidden text-center md:block">
+                Currently → <span className="text-fg">{site.currently}</span>
               </span>
-            </span>
-          </span>
-          <span className="hero-row-2 flex items-end justify-end overflow-hidden pb-[0.04em] pr-[0.02em]" aria-hidden="true">
-            <Chars text={site.lastName.toUpperCase()} />
-            <span className="hero-char inline-block text-accent">.</span>
-          </span>
-        </h1>
-
-        {/* Bottom */}
-        <div className="hero-bottom">
-          <div className="hero-line mb-5 h-px origin-left bg-line" />
-          <div className="grid items-end gap-8 md:grid-cols-12">
-            <div className="md:col-span-5">
-              <p className="hero-serif-mobile type-serif mb-3 text-2xl text-accent sm:hidden">full-stack engineer</p>
-              <RevealText as="p" scroll={false} play={play} delay={delay + 0.6} className="max-w-[38ch] text-base leading-relaxed text-fg/85 md:text-lg">
-                {site.tagline}
-              </RevealText>
+              <span className="hero-fade text-right">
+                <LocalTime /> · {site.location.short}
+              </span>
             </div>
 
-            <ol className="flex flex-wrap gap-x-5 gap-y-2 md:col-span-4 md:justify-center" aria-label="Full-stack path">
-              {roadmap.map((stage) => (
-                <li key={stage.id} className={`hero-fade type-label flex items-center gap-2 ${stage.status === 'next' ? 'text-muted' : 'text-fg'}`}>
-                  <StageIcon status={stage.status} />
-                  {stage.title}
-                </li>
-              ))}
-            </ol>
-
-            <div className="flex items-center gap-3 md:col-span-3 md:justify-end">
-              <span className="hero-fade">
-                <Button to="/work" variant="solid">
-                  View work
-                </Button>
+            {/* Name — split to frame the creature: first name top-left, last name bottom-right */}
+            <h1
+              ref={nameRef}
+              className="type-display relative flex flex-1 select-none flex-col justify-between py-[3svh] text-[length:clamp(4.6rem,min(22vw,25svh),23rem)]"
+              aria-label={`${site.name} — ${site.role}`}
+            >
+              <span className="hero-row-1 flex items-end overflow-hidden pb-[0.04em]" aria-hidden="true">
+                <Chars text={site.firstName.toUpperCase()} />
               </span>
-              {site.resume && (
-                <span className="hero-fade">
-                  <Button href={site.resume} variant="outline" target="_blank" rel="noreferrer" icon={false}>
-                    Résumé
-                  </Button>
+              <span className="hero-row-2 flex items-end justify-end overflow-hidden pb-[0.04em] pr-[0.02em]" aria-hidden="true">
+                <Chars text={site.lastName.toUpperCase()} />
+                <span className="hero-char inline-block text-accent">.</span>
+              </span>
+            </h1>
+
+            {/* Bottom */}
+            <div>
+              <div className="hero-line mb-5 h-px origin-left bg-line" />
+              <div className="flex items-end justify-between gap-6">
+                <div>
+                  <p className="hero-fade type-serif text-[clamp(1.7rem,3vw,2.9rem)] leading-none text-accent">{site.role.toLowerCase()}</p>
+                  <p className="hero-fade type-label mt-3 flex items-center gap-2 text-muted">
+                    <span className="pulse-dot size-1.5 rounded-full bg-accent" />
+                    {site.availability.label}
+                  </p>
+                </div>
+                <span className="hero-fade type-label flex shrink-0 items-center gap-3 text-muted">
+                  <span className="hidden sm:inline">Scroll to explore</span>
+                  <span className="relative h-8 w-px overflow-hidden bg-line">
+                    <span className="absolute inset-x-0 top-0 h-1/2 animate-[scrollcue_1.8s_var(--ease-in-out-quart)_infinite] bg-fg" />
+                  </span>
                 </span>
-              )}
+              </div>
             </div>
           </div>
 
-          <div className="hero-fade type-label mt-5 hidden items-center justify-between text-muted md:flex">
-            <span className="flex items-center gap-2">
-              <span className="pulse-dot size-1.5 rounded-full bg-accent" />
-              {site.availability.label}
-            </span>
-            <span className="flex items-center gap-3">
-              Scroll to explore
-              <span className="relative h-8 w-px overflow-hidden bg-line">
-                <span className="absolute inset-x-0 top-0 h-1/2 animate-[scrollcue_1.8s_var(--ease-in-out-quart)_infinite] bg-fg" />
-              </span>
-            </span>
+          {/* The creature — in front of the name */}
+          <div className="hero-canvas-wrap pointer-events-none absolute inset-0 flex items-center justify-center">
+            <div className="hero-canvas relative aspect-square w-[min(118vw,62svh)] max-w-none md:w-[min(60vw,84svh,900px)]">
+              <div className="absolute inset-[20%] rounded-full bg-accent/25 blur-[90px]" />
+              <Suspense fallback={null}>
+                <HeroScene active={play && !covered} className="absolute inset-0" />
+              </Suspense>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+
+        <div className="hero-dim pointer-events-none absolute inset-0 bg-ink opacity-0" />
+      </section>
+    </>
   )
 }

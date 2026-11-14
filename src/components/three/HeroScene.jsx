@@ -226,7 +226,7 @@ export default function HeroScene({ active = true, className = '' }) {
     io.observe(el)
     const onVisibility = () => (document.hidden ? stop() : start())
     document.addEventListener('visibilitychange', onVisibility)
-    controls.current = { start }
+    controls.current = { start, stop }
 
     // Compile shaders + draw one frame now, so the reveal has no hitch
     renderer.compile(scene, camera)
@@ -252,10 +252,11 @@ export default function HeroScene({ active = true, className = '' }) {
     }
   }, [])
 
-  // Animation loop only runs once the page is revealed (keeps the preloader smooth)
+  // Runs only once the page is revealed (keeps the preloader smooth) and while the hero is uncovered
   useEffect(() => {
     activeRef.current = active
     if (active) controls.current?.start()
+    else controls.current?.stop()
   }, [active])
 
   return <div ref={mount} aria-hidden="true" className={`opacity-0 transition-opacity duration-[1.6s] ${className}`} />
