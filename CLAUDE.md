@@ -8,8 +8,8 @@ Personal portfolio of **Mohd Ayan** — full-stack engineer (Frontend ✓ → Ba
 Live at https://mohd-ayan-dev.vercel.app (Vercel). Heavily animated, light + dark themes, desktop and mobile.
 
 **Pages / sections**
-- `/` Home — Hero (3D blob + split name), Manifesto, Tapes (skill marquees), Path (4-stage roadmap, pinned horizontal scroll on desktop), Day job (client stores fan out on scroll + 47Home workshop card), Personal projects, Open to work (word-roll)
-- `/work` — client stores (live Shopify sites) + personal projects · `/work/:slug` — personal-project case study (unknown slug → 404 via loader)
+- `/` Home — Hero (3D blob + split name), Manifesto, Tapes (skill marquees), Path (4-stage roadmap, pinned horizontal scroll on desktop), Day job (pinned browser-window showcase that flips through the client stores on scroll + 47Home workshop card), Personal projects, Open to work (word-roll)
+- `/work` — client stores (zig-zag editorial rows) + personal projects · `/work/:slug` — personal-project case study (unknown slug → 404 via loader)
 - `/services` — "Hire me": offers (hover-expand rows), for-recruiters card, process
 - `/about` — intro, now & next, journey timeline, toolbox, principles
 - `/contact` — direct email/socials + form backed by `api/contact.js`
@@ -45,7 +45,7 @@ src/
     ui/               reusable bits: RevealText, Reveal, ScrubText, Magnetic, Marquee, Button, TransitionLink,
                       PageHeader, SectionLabel, TiltCard, LivingName (footer name), LocalTime, Logo
     three/            HeroScene (WebGL blob)
-    work/             ClientCard (browser-framed live store), Workshop (in-progress build, CSS-3D cubes)
+    work/             BrowserFrame (macOS window, colours from `--brand`), ClientRow (editorial store row), Workshop (in-progress build, CSS-3D cubes)
   context/            Theme, SmoothScroll (Lenis), App (load state), Transition (page curtains)
   lib/gsap.js         the ONLY place gsap plugins are registered/imported from
   router.jsx          route table
@@ -101,7 +101,7 @@ Components render from these files; to change content, edit data only.
 - **`vercel.json` rewrite** sends every non-file path to `index.html` but must keep excluding `api/`, or the form receives HTML instead of JSON.
 - **Domain is hardcoded** in `index.html` (canonical, OG/Twitter, JSON-LD), `public/sitemap.xml` and `public/robots.txt`. Update all of them if the URL changes; add new routes to the sitemap. JSON-LD in `index.html` also duplicates personal info from `site.js`.
 - **Adding a page:** route in `router.jsx` (lazy via `page()`), entry in `navigation.js`, open it with `PageHeader` + `SectionLabel`s, add its own `<title>`/`<meta>` (React 19 renders them into `<head>`), and add it to the sitemap.
-- **Pinned ScrollTrigger** in `sections/home/Path.jsx`: layout-size changes above or inside it need `ScrollTrigger.refresh()`. Route changes already reset scroll and refresh (`ScrollReset` in `RootLayout`).
+- **Pinned ScrollTriggers** on Home: `Path.jsx` (horizontal) and `ClientWork.jsx` (store showcase; its length is `STEP × stores`). `ScrollReset` in `RootLayout` refreshes on route change *and* whenever document height changes (fonts, split text, lazy content); the footer reveal uses `refreshPriority: -1` so it is measured after the pins. New scroll effects near the page bottom should do the same.
 - **`Reveal` animates `opacity`, not `autoAlpha`,** on purpose — `visibility: hidden` would make content unreachable by keyboard Tab.
 - **Cursor ring size uses width/height, not `scale`,** so labels stay sharp.
 - **React hooks lint is strict:** no ref reads during render, no setState in effects. Use CSS variables written from effects or tickers (see ScrollRail's `--th`), or the prev-value pattern.

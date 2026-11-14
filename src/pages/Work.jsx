@@ -9,7 +9,7 @@ import TransitionLink from '../components/ui/TransitionLink'
 import Reveal from '../components/ui/Reveal'
 import SectionLabel from '../components/ui/SectionLabel'
 import RevealText from '../components/ui/RevealText'
-import ClientCard from '../components/work/ClientCard'
+import ClientRow from '../components/work/ClientRow'
 import Workshop from '../components/work/Workshop'
 import { clients, job } from '../data/clients'
 
@@ -127,13 +127,13 @@ export default function Work() {
               Live on Shopify
             </RevealText>
           </div>
-          <p className="type-label max-w-[30ch] text-muted md:text-right">Hover a store to peek inside · click to visit the live site</p>
+          <p className="type-label max-w-[30ch] text-muted md:text-right">Hover a window to peek inside · click to visit the live store</p>
         </div>
-        <Reveal className="mt-14 grid gap-x-8 gap-y-16 md:mt-20 md:grid-cols-2 xl:grid-cols-3" stagger={0.12}>
+        <div className="mt-16 grid gap-28 md:mt-24 lg:gap-40">
           {clients.map((c, i) => (
-            <ClientCard key={c.slug} client={c} index={i} detailed />
+            <ClientRow key={c.slug} client={c} index={i} flip={i % 2 === 1} />
           ))}
-        </Reveal>
+        </div>
         <Reveal className="mt-20 md:mt-28">
           <Workshop />
         </Reveal>
